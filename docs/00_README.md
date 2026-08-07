@@ -23,3 +23,5 @@ Este directorio es el punto de entrada documental de One Studios. Sigue la conve
 - SQL histórico: solo referencia; no ejecutar sin reconciliación previa.
 
 Los informes `AUDITORIA_*`, `CERT_*`, `FUNCTIONAL_TESTS_*` y archivos similares son evidencia histórica. No sustituyen las pruebas ejecutables.
+
+- [Historial legado consolidado](./HISTORIAL_LEGACY.md)

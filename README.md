@@ -49,3 +49,16 @@ No se debe abrir `index.html` directamente con `file://`, porque la PWA, los mó
 ## Regla principal
 
 No agregar nuevas funciones directamente al monolito. Todo código nuevo debe entrar por una carpeta de dominio bajo `src/features/` y acceder a Supabase mediante `src/services/`.
+
+## Estructura activa
+
+- `assets/`: recursos del navegador.
+- `src/`: cÃ³digo modular nuevo.
+- `config/`: configuraciÃ³n vigente.
+- `docs/`: documentaciÃ³n canÃ³nica e historial consolidado.
+- `archive/`: SQL heredado conservado fuera de la raÃ­z operativa.
+- `scripts/windows/`: utilidades locales de SAKURA.
+- `supabase/migrations/`: nuevas migraciones de base de datos.
+- `tests/` y `tools/`: controles automatizados.
+
+Los reportes de entrega, hashes y auditorÃ­as histÃ³ricas se consultan en Git y no se duplican en la raÃ­z.

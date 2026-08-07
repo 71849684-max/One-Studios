@@ -161,12 +161,6 @@
       "mode": "lazy-local-first-no-polling"
     },
     {
-      "name": "sakura-presence-loader-v17-12-13-6",
-      "path": "assets/js/sakura-presence-loader-v17-12-13-6.js",
-      "origin": "v17.12.13.6",
-      "mode": "lazy-permanent-entry"
-    },
-    {
       "name": "sakura-personal-workspace-v17-12-13-6",
       "path": "assets/js/sakura-personal-workspace-v17-12-13-6.js",
       "origin": "v17.12.13.6",
@@ -197,12 +191,6 @@
       "mode": "adaptive-safe-controller-motion-aware"
     },
     {
-      "name": "sakura-presence-loader-v17-15-1",
-      "path": "assets/js/sakura-presence-loader-v17-15-1.js",
-      "origin": "v17.15.1",
-      "mode": "permanent-lazy-academy-self-improvement"
-    },
-    {
       "name": "sakura-live-motion-background-fusion-v17-13-2",
       "path": "assets/js/sakura-live-motion-background-fusion-v17-13-2.js",
       "origin": "v17.13.2",
@@ -213,12 +201,6 @@
       "path": "assets/css/sakura-live-motion-background-fusion-v17-13-2.css",
       "origin": "v17.13.2",
       "mode": "particle-motion-sync-visual-hotfix"
-    },
-    {
-      "name": "sakura-academy-v17-15-1",
-      "path": "assets/js/sakura-academy-v17-15-1.js",
-      "origin": "v17.15.1",
-      "mode": "local-academy-interaction-supervised-learning"
     },
     {
       "name": "sakura-academy-css-v17-14-0",
@@ -237,12 +219,6 @@
       "path": "assets/js/unified-command-center-v17-15-0.js",
       "origin": "v17.15.0",
       "mode": "role-aware-local-intelligence-no-polling"
-    },
-    {
-      "name": "release-marker-v17-15-1",
-      "path": "assets/js/release-marker-v17-15-1.js",
-      "origin": "v17.15.1",
-      "mode": "release-marker"
     },
     {
       "name": "interaction-integrity-bootstrap-v17-15-2",
@@ -299,46 +275,10 @@
       "mode": "release-marker"
     },
     {
-      "name": "release-marker-v17-15-6",
-      "path": "assets/js/release-marker-v17-15-6.js",
-      "origin": "v17.15.6",
-      "mode": "canonical-release-integrity"
-    },
-    {
-      "name": "release-marker-v17-15-7",
-      "path": "assets/js/release-marker-v17-15-7.js",
-      "origin": "v17.15.7",
-      "mode": "canonical-version-self-healing-and-sync-truth"
-    },
-    {
-      "name": "release-marker-v17-15-8",
-      "path": "assets/js/release-marker-v17-15-8.js",
-      "origin": "v17.15.8",
-      "mode": "single-final-canonical-release-marker"
-    },
-    {
-      "name": "release-marker-v17-15-9",
-      "path": "assets/js/release-marker-v17-15-9.js",
-      "origin": "v17.15.9",
-      "mode": "build-manifest-version-alignment"
-    },
-    {
-      "name": "release-marker-v17-15-10",
-      "path": "assets/js/release-marker-v17-15-10.js",
-      "origin": "v17.15.10",
-      "mode": "sakura-conversation-context-sanitization"
-    },
-    {
       "name": "sakura-affective-task-intelligence-v17-15-11",
       "path": "assets/js/sakura-affective-task-intelligence-v17-15-11.js",
       "origin": "v17.15.11",
       "mode": "ambient-affective-task-awareness"
-    },
-    {
-      "name": "release-marker-v17-15-11",
-      "path": "assets/js/release-marker-v17-15-11.js",
-      "origin": "v17.15.11",
-      "mode": "canonical-release"
     },
     {
       "name": "sakura-post-login-orb-visibility-v17-15-12",
@@ -347,34 +287,16 @@
       "mode": "post-login-ambient-orb-visibility"
     },
     {
-      "name": "release-marker-v17-15-12",
-      "path": "assets/js/release-marker-v17-15-12.js",
-      "origin": "v17.15.12",
-      "mode": "canonical-release"
-    },
-    {
       "name": "sakura-authenticated-orb-mount-v17-15-13",
       "path": "assets/js/sakura-authenticated-orb-mount-v17-15-13.js",
       "origin": "v17.15.13",
       "mode": "authenticated-orb-direct-mount"
     },
     {
-      "name": "release-marker-v17-15-13",
-      "path": "assets/js/release-marker-v17-15-13.js",
-      "origin": "v17.15.13",
-      "mode": "canonical-release"
-    },
-    {
       "name": "sakura-static-orb-mount-v17-15-14",
       "path": "assets/js/sakura-static-orb-mount-v17-15-14.js",
       "origin": "v17.15.14",
       "mode": "static-authenticated-orb"
-    },
-    {
-      "name": "release-marker-v17-15-14",
-      "path": "assets/js/release-marker-v17-15-14.js",
-      "origin": "v17.15.14",
-      "mode": "canonical-release"
     },
     {
       "name": "sakura-floating-orb-presence-v17-15-15-css",
@@ -386,18 +308,6 @@
       "name": "sakura-floating-orb-presence-v17-15-15",
       "path": "assets/js/sakura-floating-orb-presence-v17-15-15.js",
       "origin": "v17.15.15",
-      "mode": "productive"
-    },
-    {
-      "name": "release-marker-v17-15-15",
-      "path": "assets/js/release-marker-v17-15-15.js",
-      "origin": "v17.15.15",
-      "mode": "read-only"
-    },
-    {
-      "name": "requests360-internal-v17-16-0",
-      "path": "assets/js/requests360-internal-v17-16-0.js",
-      "origin": "v17.16.0",
       "mode": "productive"
     },
     {
@@ -413,40 +323,16 @@
       "mode": "public-intake"
     },
     {
-      "name": "release-marker-v17-16-0",
-      "path": "assets/js/release-marker-v17-16-0.js",
-      "origin": "v17.16.0",
-      "mode": "canonical-release"
-    },
-    {
       "name": "requests360-public-apple-liquid-glass-v17-16-1",
       "path": "solicitudes/assets/solicitudes-360.css",
       "origin": "v17.16.1",
       "mode": "public-portal-ux"
     },
     {
-      "name": "release-marker-v17-16-1",
-      "path": "assets/js/release-marker-v17-16-1.js",
-      "origin": "v17.16.1",
-      "mode": "canonical-release"
-    },
-    {
-      "name": "requests360-internal-v17-16-2",
-      "path": "assets/js/requests360-internal-v17-16-2.js",
-      "origin": "v17.16.2",
-      "mode": "productive-realtime"
-    },
-    {
       "name": "requests360-realtime-notifications-v17-16-2",
       "path": "assets/css/requests360-realtime-notifications-v17-16-2.css",
       "origin": "v17.16.2",
       "mode": "productive-ui"
-    },
-    {
-      "name": "release-marker-v17-16-2",
-      "path": "assets/js/release-marker-v17-16-2.js",
-      "origin": "v17.16.2",
-      "mode": "canonical-release"
     },
     {
       "name": "requests360-internal-v17-16-3",
@@ -461,22 +347,10 @@
       "mode": "productive"
     },
     {
-      "name": "release-marker-v17-16-3",
-      "path": "assets/js/release-marker-v17-16-3.js",
-      "origin": "v17.16.3",
-      "mode": "canonical-release"
-    },
-    {
       "name": "official-clean-start-v17-16-4",
       "path": "assets/js/official-clean-start-v17-16-4.js",
       "origin": "v17.16.4",
       "mode": "one-time-local-cleanup"
-    },
-    {
-      "name": "release-marker-v17-16-4",
-      "path": "assets/js/release-marker-v17-16-4.js",
-      "origin": "v17.16.4",
-      "mode": "canonical-release"
     },
     {
       "name": "creative-arena-interface-themes-v17-16-5",
@@ -491,12 +365,6 @@
       "mode": "appearance-only"
     },
     {
-      "name": "release-marker-v17-16-5",
-      "path": "assets/js/release-marker-v17-16-5.js",
-      "origin": "v17.16.5",
-      "mode": "canonical-release"
-    },
-    {
       "name": "sakura-personal-workspace-v17-16-6",
       "path": "assets/js/sakura-personal-workspace-v17-12-13-6.js",
       "origin": "v17.16.6",
@@ -507,12 +375,6 @@
       "path": "assets/css/sakura-messaging-whatsapp-v17-16-6.css",
       "origin": "v17.16.6",
       "mode": "appearance-and-supported-chat-actions"
-    },
-    {
-      "name": "release-marker-v17-16-6",
-      "path": "assets/js/release-marker-v17-16-6.js",
-      "origin": "v17.16.6",
-      "mode": "canonical-release"
     },
     {
       "name": "sakura-personal-workspace-v17-16-7",
@@ -1392,5 +1254,6 @@
     "assets/js/creative-arena-interface-themes-v17-16-5.js",
     "assets/js/sakura-personal-workspace-v17-12-13-6.js",
     "assets/js/release-marker-v17-16-7.js"
-  ]
+  ],
+  "updatedAt": "2026-08-07"
 }

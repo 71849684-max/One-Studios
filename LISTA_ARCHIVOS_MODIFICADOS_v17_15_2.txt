@@ -1,5 +1,0 @@
-index.html
-manifest.webmanifest
-service-worker.js
-config/build-manifest.json
-config/public-runtime-config.js
