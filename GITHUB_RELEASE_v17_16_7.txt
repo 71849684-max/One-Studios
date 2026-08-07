@@ -1,0 +1,11 @@
+SUMMARY
+INBESTIGA Marketing Cloud v17.16.7 — Sakura Messaging · Whatsapp-Style Multimedia & Message Control V2
+
+Añade multimedia privada, notas de voz, reacciones sincronizadas, respuestas
+vinculadas, edición, eliminación, destacados sincronizados y galería de
+archivos dentro de la mensajería de SAKURA, conservando ibm_v33_send_message.
+
+COMMIT
+git add .
+git commit -m "feat: release v17.16.7 SAKURA messaging V2 multimedia reactions and message controls"
+git push origin main

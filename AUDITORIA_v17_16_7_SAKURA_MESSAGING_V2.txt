@@ -1,0 +1,40 @@
+INBESTIGA Marketing Cloud v17.16.7
+SAKURA MESSAGING · WHATSAPP-STYLE MULTIMEDIA & MESSAGE CONTROL V2
+
+BASE
+v17.16.6 confirmada como primera versión de mensajería estilo WhatsApp.
+
+FUNCIONES PRODUCTIVAS NUEVAS
+- Adjuntar imágenes, videos, documentos y audios directamente desde SAKURA.
+- Grabación de notas de voz con pausa, continuación, cancelación y escucha previa.
+- Almacenamiento privado en inbestiga-message-files.
+- URLs firmadas temporales; el bucket no es público.
+- Máximo 10 archivos, 25 MB por archivo y 75 MB por mensaje.
+- Reacciones sincronizadas entre usuarios.
+- Respuestas vinculadas al mensaje original.
+- Edición de mensajes propios durante 15 minutos.
+- Eliminar para todos durante 48 horas.
+- Eliminar solo para mí mediante estado personal.
+- Mensajes destacados sincronizados por usuario.
+- Galería lateral de multimedia, documentos y destacados.
+- Lectura por conversación.
+- Realtime adicional para reacciones, adjuntos, estados y actualizaciones.
+
+COMPATIBILIDAD
+La nueva RPC ibm_v367_send_message llama internamente a ibm_v33_send_message.
+Por lo tanto conserva la lógica productiva existente, incluyendo notificaciones,
+permisos y registro del mensaje original.
+
+SEGURIDAD
+- El remitente solo puede subir dentro de su propia carpeta.
+- Los archivos solo pueden ser leídos por remitente y destinatario.
+- No se publican URLs permanentes.
+- RLS habilitado en las tres tablas nuevas.
+- No se usa service_role en el navegador.
+- No se afirma cifrado de extremo a extremo.
+
+PENDIENTE PARA UNA VERSIÓN POSTERIOR
+- Grupos.
+- Encuestas.
+- Reenvío sincronizado.
+- Llamadas y videollamadas.

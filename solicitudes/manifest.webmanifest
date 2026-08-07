@@ -1,0 +1,25 @@
+{
+  "name": "Solicitudes 360 · INBESTIGA",
+  "short_name": "Solicitudes 360",
+  "description": "Portal Apple Liquid Glass con área exacta, voz, archivos y enlaces para Solicitudes 360.",
+  "id": "inbestiga-solicitudes-360-v17-16-4",
+  "start_url": "/solicitudes/",
+  "scope": "/solicitudes/",
+  "display": "standalone",
+  "background_color": "#f5f5f7",
+  "theme_color": "#f5f5f7",
+  "icons": [
+    {
+      "src": "/assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

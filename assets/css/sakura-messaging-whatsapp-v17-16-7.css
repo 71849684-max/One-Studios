@@ -1,0 +1,93 @@
+/* INBESTIGA v17.16.7 · SAKURA WhatsApp-style Multimedia Messaging V2 */
+#skViewMessages .sk-wa-intro-actions{display:flex;align-items:center;gap:7px}
+#skViewMessages .sk-wa-v2-status{padding:6px 9px;border-radius:999px;background:#e7fce9;color:#008069;font-size:7px;font-weight:900}
+#skViewMessages .sk-wa-v2-status.warn{background:#fff4d8;color:#946200}
+#skViewMessages .sk-wa-v2-warning{display:flex;align-items:center;gap:9px;margin:0 0 8px;padding:9px 11px;border-radius:11px;background:#fff8e7;border:1px solid rgba(255,177,0,.20);color:#73520b}
+#skViewMessages .sk-wa-v2-warning strong{font-size:9px}
+#skViewMessages .sk-wa-v2-warning span{font-size:7px}
+#skViewMessages .sk-wa-thread{position:relative}
+#skViewMessages .sk-wa-shell.media-open .sk-wa-thread{grid-template-columns:minmax(0,1fr) 230px}
+#skViewMessages .sk-wa-shell.media-open .sk-wa-thread>*:not(.sk-wa-media-drawer){grid-column:1}
+#skViewMessages .sk-wa-media-drawer{grid-column:2!important;grid-row:1/5!important;overflow:auto;background:#fff;border-left:1px solid var(--sk-wa-line);z-index:8}
+#skViewMessages .sk-wa-media-drawer>header{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px;background:#f0f2f5;border-bottom:1px solid var(--sk-wa-line)}
+#skViewMessages .sk-wa-media-drawer>header div{display:grid;gap:2px}
+#skViewMessages .sk-wa-media-drawer>header strong{font-size:10px;color:#111b21}
+#skViewMessages .sk-wa-media-drawer>header small{font-size:7px;color:#667781}
+#skViewMessages .sk-wa-media-drawer>header button{width:28px;height:28px;border:0;border-radius:50%;background:#fff;color:#54656f;font-size:16px;cursor:pointer}
+#skViewMessages .sk-wa-media-drawer section{padding:11px;border-bottom:1px solid var(--sk-wa-line)}
+#skViewMessages .sk-wa-media-drawer h4{margin:0 0 8px;font-size:8px;text-transform:uppercase;letter-spacing:.10em;color:#667781}
+#skViewMessages .sk-wa-media-grid{display:grid;gap:7px}
+#skViewMessages .sk-wa-drawer-empty{font-size:8px;color:#8696a0}
+#skViewMessages .sk-wa-starred-item{width:100%;display:grid;gap:3px;padding:8px;border:0;border-radius:9px;background:#f5f6f6;text-align:left;cursor:pointer;margin-bottom:6px}
+#skViewMessages .sk-wa-starred-item strong{font-size:8px;color:#008069}
+#skViewMessages .sk-wa-starred-item span{font-size:8px;color:#41525d;line-height:1.35}
+#skViewMessages .sk-wa-starred-item time{font-size:6px;color:#8696a0}
+#skViewMessages .sk-wa-bubble.deleted{background:#f7f7f7!important;color:#667781;font-style:italic}
+#skViewMessages .sk-wa-deleted-text{padding:2px 4px;font-size:9px}
+#skViewMessages .sk-wa-bubble.flash{animation:skWaFlash 1.45s ease}
+@keyframes skWaFlash{0%,100%{box-shadow:0 1px 2px rgba(17,27,33,.13)}35%{box-shadow:0 0 0 5px rgba(0,168,132,.20),0 5px 18px rgba(0,168,132,.22)}}
+#skViewMessages .sk-wa-quote{width:100%;border:0;text-align:left;cursor:pointer}
+#skViewMessages .sk-wa-attachments{display:grid;gap:6px;margin-top:6px}
+#skViewMessages .sk-wa-media{overflow:hidden;border-radius:8px;background:rgba(17,27,33,.055);color:#111b21;text-decoration:none}
+#skViewMessages .sk-wa-media.image{display:grid}
+#skViewMessages .sk-wa-media.image img{display:block;width:100%;max-height:250px;object-fit:cover;background:#dfe4e7}
+#skViewMessages .sk-wa-media.image span,
+#skViewMessages .sk-wa-media.video span{padding:5px 7px;font-size:7px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#skViewMessages .sk-wa-media.audio{display:grid;gap:5px;padding:7px}
+#skViewMessages .sk-wa-media.audio audio{width:100%;height:34px}
+#skViewMessages .sk-wa-media.audio span{display:grid;gap:1px}
+#skViewMessages .sk-wa-media.audio strong{font-size:8px}
+#skViewMessages .sk-wa-media.audio small{font-size:6px;color:#667781}
+#skViewMessages .sk-wa-media.video{display:grid}
+#skViewMessages .sk-wa-media.video video{width:100%;max-height:260px;background:#111}
+#skViewMessages .sk-wa-media.document{display:grid;grid-template-columns:35px minmax(0,1fr) auto;align-items:center;gap:8px;padding:8px}
+#skViewMessages .sk-wa-media.document i{width:35px;height:35px;border-radius:8px;display:grid;place-items:center;background:#e3f2ef;color:#008069;font-style:normal;font-size:7px;font-weight:900}
+#skViewMessages .sk-wa-media.document span{display:grid;gap:1px;min-width:0}
+#skViewMessages .sk-wa-media.document strong{font-size:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#skViewMessages .sk-wa-media.document small{font-size:6px;color:#667781}
+#skViewMessages .sk-wa-media.document b{font-size:11px;color:#008069}
+#skViewMessages .sk-wa-reactions{position:absolute;left:8px;bottom:-13px;display:flex;gap:3px;z-index:3}
+#skViewMessages .sk-wa-reactions button{height:23px;padding:0 6px;border:1px solid rgba(17,27,33,.10);border-radius:999px;background:#fff;box-shadow:0 2px 7px rgba(17,27,33,.12);font-size:9px;cursor:pointer}
+#skViewMessages .sk-wa-reactions button.mine{border-color:#00a884;background:#e7fce9}
+#skViewMessages .sk-wa-reactions span{font-size:6px;color:#54656f}
+#skViewMessages .sk-wa-message-row:has(.sk-wa-reactions){margin-bottom:14px}
+#skViewMessages .sk-wa-reaction-picker{position:absolute;right:2px;top:-38px;display:flex;gap:2px;padding:5px;border-radius:999px;background:#fff;box-shadow:0 6px 22px rgba(17,27,33,.22);z-index:6}
+#skViewMessages .sk-wa-reaction-picker button{width:29px;height:29px;border:0;border-radius:50%;background:transparent;font-size:16px;cursor:pointer}
+#skViewMessages .sk-wa-reaction-picker button:hover{background:#f0f2f5;transform:scale(1.12)}
+#skViewMessages .sk-wa-message-menu{position:absolute;right:2px;top:-4px;display:grid;min-width:132px;padding:5px;border-radius:9px;background:#fff;box-shadow:0 8px 28px rgba(17,27,33,.24);z-index:7}
+#skViewMessages .sk-wa-message-menu button{border:0;border-radius:6px;padding:8px;background:transparent;color:#33434c;text-align:left;font:inherit;font-size:8px;cursor:pointer}
+#skViewMessages .sk-wa-message-menu button:hover{background:#f0f2f5}
+#skViewMessages .sk-wa-reply-bar.edit{border-left-color:#ffb100}
+#skViewMessages .sk-wa-reply-bar.edit strong{color:#946200}
+#skViewMessages .sk-wa-pending-files{display:flex;gap:6px;overflow:auto;padding:7px 9px 0}
+#skViewMessages .sk-wa-pending-files article{position:relative;min-width:150px;max-width:220px;display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:6px;align-items:center;padding:7px;border-radius:9px;background:#fff;border:1px solid rgba(17,27,33,.08)}
+#skViewMessages .sk-wa-pending-files article>span{width:28px;height:28px;border-radius:7px;display:grid;place-items:center;background:#e7fce9;font-size:13px}
+#skViewMessages .sk-wa-pending-files article>div{display:grid;min-width:0}
+#skViewMessages .sk-wa-pending-files strong{font-size:7px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#skViewMessages .sk-wa-pending-files small{font-size:6px;color:#8696a0}
+#skViewMessages .sk-wa-pending-files article>button{width:21px;height:21px;border:0;border-radius:50%;background:#f0f2f5;color:#667781;cursor:pointer}
+#skViewMessages .sk-wa-pending-files img{grid-column:1/-1;width:100%;height:70px;object-fit:cover;border-radius:6px}
+#skViewMessages .sk-wa-pending-files audio{grid-column:1/-1;width:100%;height:30px}
+#skViewMessages .sk-wa-recording{display:flex;align-items:center;gap:7px;margin:7px 9px 0;padding:8px 10px;border-radius:9px;background:#fff;border:1px solid rgba(255,59,48,.15)}
+#skViewMessages .sk-wa-recording .pulse{width:9px;height:9px;border-radius:50%;background:#ff3b30;box-shadow:0 0 0 5px rgba(255,59,48,.10);animation:skWaRecordPulse 1.2s ease-in-out infinite}
+@keyframes skWaRecordPulse{50%{box-shadow:0 0 0 10px rgba(255,59,48,0)}}
+#skViewMessages .sk-wa-recording strong{font-size:10px;color:#d7352d}
+#skViewMessages .sk-wa-recording small{flex:1;font-size:7px;color:#667781}
+#skViewMessages .sk-wa-recording button{border:0;border-radius:999px;padding:6px 8px;background:#f0f2f5;color:#54656f;font:inherit;font-size:7px;font-weight:800;cursor:pointer}
+#skViewMessages #skWaRecord{font-size:14px;color:#ff3b30}
+#skViewMessages .sk-wa-intro-actions>button{border:1px solid color-mix(in srgb,var(--sk-frame-color) 15%,transparent);border-radius:999px;padding:8px 11px;background:color-mix(in srgb,var(--sk-surface) 92%,transparent);color:var(--sk-text);font:inherit;font-size:8px;font-weight:800;cursor:pointer}
+@media(max-width:960px){
+  #skViewMessages .sk-wa-shell.media-open .sk-wa-thread{grid-template-columns:1fr}
+  #skViewMessages .sk-wa-media-drawer{position:absolute;inset:0 0 0 auto;width:min(270px,88%);grid-column:auto!important;grid-row:auto!important;box-shadow:-18px 0 50px rgba(17,27,33,.22)}
+}
+@media(max-width:720px){
+  #skViewMessages .sk-wa-intro-actions{align-items:flex-end;flex-direction:column}
+  #skViewMessages .sk-wa-v2-status{font-size:6px}
+  #skViewMessages .sk-wa-recording{flex-wrap:wrap}
+  #skViewMessages .sk-wa-recording small{min-width:120px}
+}
+@media(max-width:460px){
+  #skViewMessages .sk-wa-intro-actions>button{display:none}
+  #skViewMessages .sk-wa-v2-warning{display:grid}
+  #skViewMessages .sk-wa-reaction-picker{right:-5px}
+}

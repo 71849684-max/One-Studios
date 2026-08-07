@@ -1,0 +1,25 @@
+{
+  "name": "INBESTIGA Marketing Cloud",
+  "short_name": "INBESTIGA",
+  "description": "INBESTIGA Marketing Cloud con mensajería multimedia estilo WhatsApp dentro de SAKURA.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#eef7ff",
+  "theme_color": "#7557ff",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "id": "inbestiga-marketing-cloud-v17-16-7"
+}

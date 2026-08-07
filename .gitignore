@@ -1,0 +1,17 @@
+# SAKURA Local: memoria privada y archivos temporales
+SAKURA_LOCAL_BRIDGE/SAKURA_DATA/*
+!SAKURA_LOCAL_BRIDGE/SAKURA_DATA/**/
+!SAKURA_LOCAL_BRIDGE/SAKURA_DATA/**/.gitkeep
+SAKURA_LOCAL_BRIDGE/__pycache__/
+*.pyc
+
+# Archivos locales del sistema
+.DS_Store
+Thumbs.db
+.idea/
+*.log
+
+# Dependencias y artefactos locales de herramientas
+node_modules/
+coverage/
+.cache/
