@@ -11,6 +11,12 @@
       "mode": "public-client-config"
     },
     {
+      "name": "supabase-client-service",
+      "path": "src/services/supabase-client.js",
+      "origin": "refactor-baseline-v1",
+      "mode": "infrastructure-service"
+    },
+    {
       "name": "home-editorial-core",
       "path": "assets/js/home-editorial-core.js",
       "origin": "v12.1",
@@ -525,6 +531,216 @@
       "path": "assets/js/release-marker-v17-16-7.js",
       "origin": "v17.16.7",
       "mode": "canonical-release"
+    },
+    {
+      "name": "legacy-style-01-base",
+      "path": "assets/css/legacy-inline/01-base.css",
+      "mode": "legacy-extracted-style",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-style-02-v411-delivery-stable-css",
+      "path": "assets/css/legacy-inline/02-v411-delivery-stable-css.css",
+      "mode": "legacy-extracted-style",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-style-03-v412-operational-core-css",
+      "path": "assets/css/legacy-inline/03-v412-operational-core-css.css",
+      "mode": "legacy-extracted-style",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-style-04-v413-team-operations-css",
+      "path": "assets/css/legacy-inline/04-v413-team-operations-css.css",
+      "mode": "legacy-extracted-style",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-style-05-v414-performance-insights-css",
+      "path": "assets/css/legacy-inline/05-v414-performance-insights-css.css",
+      "mode": "legacy-extracted-style",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-style-06-base",
+      "path": "assets/css/legacy-inline/06-base.css",
+      "mode": "legacy-extracted-style",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-style-07-v416-reporting-automation-css",
+      "path": "assets/css/legacy-inline/07-v416-reporting-automation-css.css",
+      "mode": "legacy-extracted-style",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-style-08-v417-security-governance-css",
+      "path": "assets/css/legacy-inline/08-v417-security-governance-css.css",
+      "mode": "legacy-extracted-style",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-style-09-v418-personalized-wall-css",
+      "path": "assets/css/legacy-inline/09-v418-personalized-wall-css.css",
+      "mode": "legacy-extracted-style",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-style-10-v422-creative-arena-clean-css",
+      "path": "assets/css/legacy-inline/10-v422-creative-arena-clean-css.css",
+      "mode": "legacy-extracted-style",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-style-11-ib-home-command-center-v66",
+      "path": "assets/css/legacy-inline/11-ib-home-command-center-v66.css",
+      "mode": "legacy-extracted-style",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-style-12-v66-home-functional-css",
+      "path": "assets/css/legacy-inline/12-v66-home-functional-css.css",
+      "mode": "legacy-extracted-style",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-style-13-v10-editorial-universe-css",
+      "path": "assets/css/legacy-inline/13-v10-editorial-universe-css.css",
+      "mode": "legacy-extracted-style",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-style-14-v11-living-editorial-css",
+      "path": "assets/css/legacy-inline/14-v11-living-editorial-css.css",
+      "mode": "legacy-extracted-style",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-style-15-v11-restored-visual-css",
+      "path": "assets/css/legacy-inline/15-v11-restored-visual-css.css",
+      "mode": "legacy-extracted-style",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-style-16-base",
+      "path": "assets/css/legacy-inline/16-base.css",
+      "mode": "legacy-extracted-style",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-style-17-v472-apple-topnav-css",
+      "path": "assets/css/legacy-inline/17-v472-apple-topnav-css.css",
+      "mode": "legacy-extracted-style",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-style-18-v473-apple-nav-refinement-css",
+      "path": "assets/css/legacy-inline/18-v473-apple-nav-refinement-css.css",
+      "mode": "legacy-extracted-style",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-style-19-v474-apple-glass-typography-css",
+      "path": "assets/css/legacy-inline/19-v474-apple-glass-typography-css.css",
+      "mode": "legacy-extracted-style",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-style-20-v475-work360-clean-focus-css",
+      "path": "assets/css/legacy-inline/20-v475-work360-clean-focus-css.css",
+      "mode": "legacy-extracted-style",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-style-21-base",
+      "path": "assets/css/legacy-inline/21-base.css",
+      "mode": "legacy-extracted-style",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-script-01-runtime",
+      "path": "assets/js/legacy-inline/01-runtime.js",
+      "mode": "legacy-extracted-script",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-script-02-v418-personalized-wall-engine",
+      "path": "assets/js/legacy-inline/02-v418-personalized-wall-engine.js",
+      "mode": "legacy-extracted-script",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-script-03-runtime",
+      "path": "assets/js/legacy-inline/03-runtime.js",
+      "mode": "legacy-extracted-script",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-script-04-v412-stable-enhancer",
+      "path": "assets/js/legacy-inline/04-v412-stable-enhancer.js",
+      "mode": "legacy-extracted-script",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-script-05-v472-apple-topnav-js",
+      "path": "assets/js/legacy-inline/05-v472-apple-topnav-js.js",
+      "mode": "legacy-extracted-script",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-script-06-runtime",
+      "path": "assets/js/legacy-inline/06-runtime.js",
+      "mode": "legacy-extracted-script",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-script-07-runtime",
+      "path": "assets/js/legacy-inline/07-runtime.js",
+      "mode": "legacy-extracted-script",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-script-08-runtime",
+      "path": "assets/js/legacy-inline/08-runtime.js",
+      "mode": "legacy-extracted-script",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-script-09-v422-creative-arena-clean-js",
+      "path": "assets/js/legacy-inline/09-v422-creative-arena-clean-js.js",
+      "mode": "legacy-extracted-script",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-script-10-v66-home-functional-js",
+      "path": "assets/js/legacy-inline/10-v66-home-functional-js.js",
+      "mode": "legacy-extracted-script",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-script-11-v80-magazine-home-js",
+      "path": "assets/js/legacy-inline/11-v80-magazine-home-js.js",
+      "mode": "legacy-extracted-script",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-script-12-v90-editorial-intelligence-js",
+      "path": "assets/js/legacy-inline/12-v90-editorial-intelligence-js.js",
+      "mode": "legacy-extracted-script",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-script-13-v10-editorial-universe-js",
+      "path": "assets/js/legacy-inline/13-v10-editorial-universe-js.js",
+      "mode": "legacy-extracted-script",
+      "origin": "refactor-baseline-v1"
+    },
+    {
+      "name": "legacy-script-14-v11-living-editorial-js",
+      "path": "assets/js/legacy-inline/14-v11-living-editorial-js.js",
+      "mode": "legacy-extracted-script",
+      "origin": "refactor-baseline-v1"
     }
   ],
   "styles": [
