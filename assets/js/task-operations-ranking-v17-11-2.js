@@ -402,7 +402,7 @@
     window.openPremiumModal?.({ title: "Calificar trabajo", subtitle: "Nota 1–10 + puntos automáticos", body, actions: [
       { label: "Cancelar", value: null, className: "ghost" },
       { label: "Guardar calificación", className: "primary", loadingLabel: "Calculando…", onClick: async () => {
-        if (!await checkBackend()) throw new Error("Instala SQL_OPCIONAL_v17_11.sql para registrar puntajes y ranking.");
+        if (!await checkBackend()) throw new Error("Instala archive/sql/optional/SQL_OPCIONAL_v17_11.sql para registrar puntajes y ranking.");
         const score = num(document.getElementById("v1711ReviewScore")?.value);
         const improvements = document.getElementById("v1711ReviewImprovements")?.value || "";
         if (score < 1 || score > 10) throw new Error("La nota debe estar entre 1 y 10.");
@@ -474,7 +474,7 @@
     if (!tier || !isDirector()) return;
     const body = `<div class="v1711-modal-grid"><label class="full"><span>Nombre del rango</span><input id="v1711TierName" value="${escHtml(tier.name)}"></label><label><span>Nivel inicial</span><input id="v1711TierMin" type="number" min="1" max="1000" value="${tier.min_level}"></label><label><span>Nivel final</span><input id="v1711TierMax" type="number" min="1" max="1000" value="${tier.max_level}"></label><label><span>Color</span><input id="v1711TierColor" type="color" value="${escHtml(tier.color || "#6e26f6")}"></label><label><span>Ícono</span><input id="v1711TierIcon" maxlength="8" value="${escHtml(tier.icon || "◆")}"></label></div>`;
     window.openPremiumModal?.({ title: "Editar rango", subtitle: code, body, actions: [{ label: "Cancelar", value: null, className: "ghost" }, { label: "Guardar rango", className: "primary", onClick: async () => {
-      if (!await checkBackend()) throw new Error("Instala SQL_OPCIONAL_v17_11.sql.");
+      if (!await checkBackend()) throw new Error("Instala archive/sql/optional/SQL_OPCIONAL_v17_11.sql.");
       const { error } = await callRpc("ibm_v1711_update_rank_tier", { p_code: code, p_name: document.getElementById("v1711TierName")?.value, p_min_level: num(document.getElementById("v1711TierMin")?.value), p_max_level: num(document.getElementById("v1711TierMax")?.value), p_color: document.getElementById("v1711TierColor")?.value, p_icon: document.getElementById("v1711TierIcon")?.value });
       if (error) throw error; await refreshDashboard(); notify("Rango actualizado", "El nuevo nombre ya aparece en el ranking.", "success"); return true;
     } }] });
@@ -524,7 +524,7 @@
 
   async function generateOccurrence(sourceTaskId) {
     if (!isManager()) throw new Error("Solo Dirección o Supervisión puede generar recurrencias.");
-    if (!await checkBackend()) throw new Error("Instala SQL_OPCIONAL_v17_11.sql.");
+    if (!await checkBackend()) throw new Error("Instala archive/sql/optional/SQL_OPCIONAL_v17_11.sql.");
     const source = taskById(sourceTaskId), op = operation(sourceTaskId);
     if (!source || !op?.recurrence_active || !op.next_due_date) throw new Error("La tarea no tiene una próxima ejecución activa.");
     if (arr(dashboard.occurrences).some((row) => same(row.source_task_id, sourceTaskId) && str(row.scheduled_date).slice(0, 10) === str(op.next_due_date).slice(0, 10))) return notify("Ya generada", "La ejecución de esa fecha ya existe.", "warning");
@@ -561,7 +561,7 @@
     const client = clientById(id);
     const body = `<div class="v1711-modal-grid"><label class="full"><span>Nombre del cliente</span><input id="v1711ClientName" value="${escHtml(client?.name || "")}" placeholder="Nombre oficial"></label></div>`;
     window.openPremiumModal?.({ title: client ? "Editar cliente" : "Nuevo cliente", subtitle: "Catálogo dinámico", body, actions: [{ label: "Cancelar", value: null, className: "ghost" }, { label: "Guardar", className: "primary", onClick: async () => {
-      if (!await checkBackend()) throw new Error("Instala SQL_OPCIONAL_v17_11.sql.");
+      if (!await checkBackend()) throw new Error("Instala archive/sql/optional/SQL_OPCIONAL_v17_11.sql.");
       const { error } = await callRpc("ibm_v1711_upsert_client", { p_client_id: id || null, p_name: document.getElementById("v1711ClientName")?.value, p_state: "active" });
       if (error) throw error; await window.loadAll?.(); await refreshDashboard(); try { await window.renderAll?.(); } catch (_) {} notify("Cliente guardado", "Los selectores se actualizaron.", "success"); return true;
     } }] });
@@ -571,14 +571,14 @@
     const campaign = campaignById(id); if (!campaign) return;
     const body = `<div class="v1711-modal-grid"><label class="full"><span>Nombre</span><input id="v1711CampaignName" value="${escHtml(campaign.name)}"></label><label><span>Cliente</span><select id="v1711CampaignClient">${clientList().map((client) => `<option value="${escHtml(client.id)}" ${same(client.id, campaign.client_id) ? "selected" : ""}>${escHtml(client.name)}</option>`).join("")}</select></label><label><span>Estado</span><input id="v1711CampaignStatus" value="${escHtml(campaign.status || "planificacion")}"></label><label><span>Inicio</span><input id="v1711CampaignStart" type="date" value="${escHtml(campaign.start_date || "")}"></label><label><span>Fin</span><input id="v1711CampaignEnd" type="date" value="${escHtml(campaign.end_date || "")}"></label><label class="full"><span>Objetivo</span><textarea id="v1711CampaignObjective">${escHtml(campaign.objective || "")}</textarea></label></div>`;
     window.openPremiumModal?.({ title: "Editar campaña", subtitle: campaign.name, body, actions: [{ label: "Cancelar", value: null, className: "ghost" }, { label: "Guardar", className: "primary", onClick: async () => {
-      if (!await checkBackend()) throw new Error("Instala SQL_OPCIONAL_v17_11.sql.");
+      if (!await checkBackend()) throw new Error("Instala archive/sql/optional/SQL_OPCIONAL_v17_11.sql.");
       const { error } = await callRpc("ibm_v1711_update_campaign", { p_campaign_id: id, p_name: document.getElementById("v1711CampaignName")?.value, p_client_id: document.getElementById("v1711CampaignClient")?.value || null, p_status: document.getElementById("v1711CampaignStatus")?.value || null, p_start_date: document.getElementById("v1711CampaignStart")?.value || null, p_end_date: document.getElementById("v1711CampaignEnd")?.value || null, p_objective: document.getElementById("v1711CampaignObjective")?.value || null, p_state: "active" });
       if (error) throw error; await window.loadAll?.(); await refreshDashboard(); try { await window.renderAll?.(); } catch (_) {} notify("Campaña actualizada", "El nuevo nombre ya está disponible.", "success"); return true;
     } }] });
   }
 
   async function setCatalogState(type, id, stateValue) {
-    if (!await checkBackend()) throw new Error("Instala SQL_OPCIONAL_v17_11.sql.");
+    if (!await checkBackend()) throw new Error("Instala archive/sql/optional/SQL_OPCIONAL_v17_11.sql.");
     const { error } = await callRpc("ibm_v1711_set_catalog_state", { p_entity_type: type, p_entity_id: id, p_state: stateValue });
     if (error) throw error;
     await refreshDashboard(); applyCatalogFilters(); notify(stateValue === "archived" ? "Archivado" : "Restaurado", "El catálogo se actualizó sin borrar historial.", "success");

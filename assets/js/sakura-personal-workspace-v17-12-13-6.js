@@ -362,7 +362,7 @@
       const signed=await Promise.all(rows(attachments.data).map(teamSignedAttachment));
       Object.assign(extras,{available:true,error:"",loadedPartner:partnerId,attachments:signed,reactions:rows(reactions.data),states:rows(states.data),loading:false});
     }catch(error){
-      Object.assign(extras,{available:false,error:teamMissingV2(error)?`Ejecuta ${"SQL_REQUERIDO_v17_16_7_SAKURA_MESSAGING_V2.sql"} para activar multimedia, reacciones y edición.`:friendlyError(error),loadedPartner:partnerId,attachments:[],reactions:[],states:[],loading:false});
+      Object.assign(extras,{available:false,error:teamMissingV2(error)?`Ejecuta ${"archive/sql/required/SQL_REQUERIDO_v17_16_7_SAKURA_MESSAGING_V2.sql"} para activar multimedia, reacciones y edición.`:friendlyError(error),loadedPartner:partnerId,attachments:[],reactions:[],states:[],loading:false});
       if(!silent)console.info("[SAKURA Mensajes V2]",error?.message||error);
     }
   }
@@ -461,10 +461,10 @@
   async function teamCopy(messageId){const message=messagesWith(app.teamMessages.partnerId).find(item=>same(item.id,messageId));if(!message||message.deleted_at)return;try{await navigator.clipboard.writeText(teamParsedText(message.text_content).body||message.text_content);toast("Mensaje copiado.")}catch(_){toast("No se pudo copiar el mensaje.")}}
   async function teamToggleStar(messageId){
     const current=teamIsStarred(messageId),api=sakuraSchema();
-    try{const result=await api.rpc("ibm_v367_set_message_state",{p_message_id:messageId,p_starred:!current,p_hidden:null});if(result.error)throw result.error;await refreshTeamExtras();toast(current?"Mensaje quitado de destacados.":"Mensaje destacado.")}catch(error){toast(teamMissingV2(error)?`Ejecuta ${"SQL_REQUERIDO_v17_16_7_SAKURA_MESSAGING_V2.sql"}.`:friendlyError(error))}
+    try{const result=await api.rpc("ibm_v367_set_message_state",{p_message_id:messageId,p_starred:!current,p_hidden:null});if(result.error)throw result.error;await refreshTeamExtras();toast(current?"Mensaje quitado de destacados.":"Mensaje destacado.")}catch(error){toast(teamMissingV2(error)?`Ejecuta ${"archive/sql/required/SQL_REQUERIDO_v17_16_7_SAKURA_MESSAGING_V2.sql"}.`:friendlyError(error))}
   }
   async function teamToggleReaction(messageId,reaction){
-    const api=sakuraSchema();try{const result=await api.rpc("ibm_v367_toggle_message_reaction",{p_message_id:messageId,p_reaction:reaction});if(result.error)throw result.error;app.teamMessages.reactionFor=null;await refreshTeamExtras()}catch(error){toast(teamMissingV2(error)?`Ejecuta ${"SQL_REQUERIDO_v17_16_7_SAKURA_MESSAGING_V2.sql"}.`:friendlyError(error))}
+    const api=sakuraSchema();try{const result=await api.rpc("ibm_v367_toggle_message_reaction",{p_message_id:messageId,p_reaction:reaction});if(result.error)throw result.error;app.teamMessages.reactionFor=null;await refreshTeamExtras()}catch(error){toast(teamMissingV2(error)?`Ejecuta ${"archive/sql/required/SQL_REQUERIDO_v17_16_7_SAKURA_MESSAGING_V2.sql"}.`:friendlyError(error))}
   }
   function teamToggleConversation(kind,partnerId,labelOn,labelOff){const enabled=teamUiToggle(kind,partnerId);toast(enabled?labelOn:labelOff);if(kind==="archived"&&enabled){app.teamMessages.partnerId="";renderTeamMessages()}else renderTeamMessages()}
   async function teamMarkAllRead(){try{const client=sbClient();if(!client?.rpc)throw new Error("Supabase no está disponible.");const{error}=await client.rpc("ibm_v33_mark_all_messages_read");if(error)throw error;toast("Mensajes marcados como leídos.");await window.safeSync?.("sakura_mark_messages_read")}catch(error){toast(`No se pudo marcar leído: ${friendlyError(error)}`)}}
@@ -482,7 +482,7 @@
   }
   async function teamDeleteForMe(messageId){
     const ok=window.confirm?.("¿Eliminar este mensaje solo para ti?");if(!ok)return;
-    try{const result=await sakuraSchema().rpc("ibm_v367_set_message_state",{p_message_id:messageId,p_starred:null,p_hidden:true});if(result.error)throw result.error;app.teamMessages.menuFor=null;await refreshTeamExtras()}catch(error){toast(teamMissingV2(error)?`Ejecuta ${"SQL_REQUERIDO_v17_16_7_SAKURA_MESSAGING_V2.sql"}.`:friendlyError(error))}
+    try{const result=await sakuraSchema().rpc("ibm_v367_set_message_state",{p_message_id:messageId,p_starred:null,p_hidden:true});if(result.error)throw result.error;app.teamMessages.menuFor=null;await refreshTeamExtras()}catch(error){toast(teamMissingV2(error)?`Ejecuta ${"archive/sql/required/SQL_REQUERIDO_v17_16_7_SAKURA_MESSAGING_V2.sql"}.`:friendlyError(error))}
   }
   async function teamDeleteForEveryone(messageId){
     const ok=window.confirm?.("¿Eliminar este mensaje para todos?");if(!ok)return;
@@ -490,7 +490,7 @@
       const result=await sakuraSchema().rpc("ibm_v367_delete_message_everyone",{p_message_id:messageId});if(result.error)throw result.error;
       const paths=rows(result.data?.storage_paths);if(paths.length)await sbClient().storage.from(TEAM_BUCKET).remove(paths);
       app.teamMessages.menuFor=null;await window.safeSync?.("sakura_delete_message");await refreshTeamExtras();toast("Mensaje eliminado para todos.");
-    }catch(error){toast(teamMissingV2(error)?`Ejecuta ${"SQL_REQUERIDO_v17_16_7_SAKURA_MESSAGING_V2.sql"}.`:friendlyError(error))}
+    }catch(error){toast(teamMissingV2(error)?`Ejecuta ${"archive/sql/required/SQL_REQUERIDO_v17_16_7_SAKURA_MESSAGING_V2.sql"}.`:friendlyError(error))}
   }
   function teamSafeFileName(name){return String(name||"archivo").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-zA-Z0-9._-]+/g,"_").slice(-180)||"archivo"}
   function teamAddFiles(fileList,durationMap={}){
@@ -620,7 +620,7 @@
       clearTeamDraft(partnerId);teamClearFiles();app.teamMessages.replyTo=null;app.teamMessages.emojiOpen=false;app.teamMessages.extras.loadedPartner="";
       await window.safeSync?.("sakura_team_message_v2");await loadTeamExtras(partnerId,{silent:true});renderTeamMessages();
     }catch(error){
-      toast(teamMissingV2(error)?`Ejecuta ${"SQL_REQUERIDO_v17_16_7_SAKURA_MESSAGING_V2.sql"} antes de usar archivos, reacciones o edición.`:`No se pudo enviar: ${friendlyError(error)}`)
+      toast(teamMissingV2(error)?`Ejecuta ${"archive/sql/required/SQL_REQUERIDO_v17_16_7_SAKURA_MESSAGING_V2.sql"} antes de usar archivos, reacciones o edición.`:`No se pudo enviar: ${friendlyError(error)}`)
     }finally{app.teamMessages.sending=false;if(button){button.disabled=false;button.classList.remove("sending")}}
   }
 

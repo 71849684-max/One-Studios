@@ -1,7 +1,7 @@
 {
   "name": "one-studios-marketing-cloud",
   "private": true,
-  "version": "17.16.7-refactor.1",
+  "version": "17.16.7-refactor.2",
   "description": "Baseline refactorizado de One Studios Marketing Cloud",
   "scripts": {
     "verify": "node tools/verify-baseline.mjs",

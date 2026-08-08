@@ -438,7 +438,7 @@
       const message = error?.message || String(error);
       return {
         local: localCheck,
-        cloud: check("work360-cloud", "sync", "Work 360 en Supabase", "warn", "Fallback local", `${message}. SQL_OPCIONAL_v17_0.sql permanece opcional y no fue ejecutado por este centro.`),
+        cloud: check("work360-cloud", "sync", "Work 360 en Supabase", "warn", "Fallback local", `${message}. archive/sql/optional/SQL_OPCIONAL_v17_0.sql permanece opcional y no fue ejecutado por este centro.`),
         pending: check("work360-pending", "sync", "Cambios por sincronizar", meaningfulLocal ? "warn" : "ok", meaningfulLocal ? "Solo local" : "Sin pendientes detectados", meaningfulLocal ? "La planificación está protegida en este navegador, pero no se confirmó copia en Supabase." : "El contenedor local está vacío y no contiene trabajo por sincronizar."),
         mode: "local",
         localUpdated,
@@ -753,7 +753,7 @@
           "Las pruebas automáticas son de lectura y no certifican RLS de escritura.",
           "Realtime entre dos usuarios, carga real de archivos y persistencia cruzada requieren pruebas manuales.",
           "La introspección OpenAPI restringida no sustituye la ejecución controlada de las 45 RPC por rol.",
-          "SQL_OPCIONAL_v16_1.sql, SQL_OPCIONAL_v17_0.sql, SQL_OPCIONAL_v17_5_1.sql, SQL_OPCIONAL_v17_7.sql y SQL_OPCIONAL_v17_8.sql no se ejecutan automáticamente.",
+          "archive/sql/optional/SQL_OPCIONAL_v16_1.sql, archive/sql/optional/SQL_OPCIONAL_v17_0.sql, archive/sql/optional/SQL_OPCIONAL_v17_5_1.sql, archive/sql/optional/SQL_OPCIONAL_v17_7.sql y archive/sql/optional/SQL_OPCIONAL_v17_8.sql no se ejecutan automáticamente.",
           "La composición visual se certifica con SAKURA abierta; si está cerrada, la comprobación queda informativa."
         ]
       };

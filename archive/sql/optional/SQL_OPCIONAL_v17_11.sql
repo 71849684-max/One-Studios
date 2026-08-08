@@ -23,7 +23,7 @@ begin
   where to_regclass(format('marketing_app.%I',table_name)) is null;
 
   if v_missing is not null then
-    raise exception 'Preflight v17.11: faltan tablas requeridas: %. Instala primero SQL_OPCIONAL_v17_9.sql.',v_missing using errcode='42P01';
+    raise exception 'Preflight v17.11: faltan tablas requeridas: %. Instala primero archive/sql/optional/SQL_OPCIONAL_v17_9.sql.',v_missing using errcode='42P01';
   end if;
 
   with required(table_name,column_name) as (

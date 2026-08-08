@@ -251,7 +251,7 @@
     const rpc = await getApi().rpc("ibm_v175_patch_record", { p_entity_type: entity, p_entity_id: String(id), p_patch: patch });
     if (!rpc.error) return rpc.data;
     if (!isMissingRpc(rpc.error)) throw rpc.error;
-    throw new Error("La edición segura requiere instalar manualmente SQL_OPCIONAL_v17_5_1.sql. No se intentó una actualización directa sin auditoría.");
+    throw new Error("La edición segura requiere instalar manualmente archive/sql/optional/SQL_OPCIONAL_v17_5_1.sql. No se intentó una actualización directa sin auditoría.");
   }
 
   async function setRecordState(entity, id, lifecycleState, reason = "") {
@@ -265,7 +265,7 @@
       clearLocalPending(entity, id, data); return data;
     }
     if (!isMissingRpc(result.error)) throw result.error;
-    mode = "local"; lastError = "SQL_OPCIONAL_v17_5_1.sql aún no está instalado; el cambio se conserva en este navegador.";
+    mode = "local"; lastError = "archive/sql/optional/SQL_OPCIONAL_v17_5_1.sql aún no está instalado; el cambio se conserva en este navegador.";
     return saveLocalRecord(entity, id, lifecycleState, reason, true);
   }
 
@@ -525,7 +525,7 @@
     const pending = pendingCount();
     if (mode === "cloud" && !pending) return { status: "ok", value: "Ciclo de vida sincronizado", detail: "Edición, archivado, papelera y restauración disponen de backend v17.5.1." };
     if (mode === "cloud" && pending) return { status: "warn", value: `${pending} cambio${pending === 1 ? "" : "s"} pendiente${pending === 1 ? "" : "s"}`, detail: lastError || "Los cambios se reintentarán cuando Supabase esté disponible." };
-    return { status: "info", value: "Fallback local disponible", detail: "Ejecuta SQL_OPCIONAL_v17_5_1.sql manualmente para sincronizar el ciclo de vida entre dispositivos. No se realiza borrado físico." };
+    return { status: "info", value: "Fallback local disponible", detail: "Ejecuta archive/sql/optional/SQL_OPCIONAL_v17_5_1.sql manualmente para sincronizar el ciclo de vida entre dispositivos. No se realiza borrado físico." };
   }
 
   function init() {

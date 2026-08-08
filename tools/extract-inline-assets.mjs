@@ -12,19 +12,10 @@ function slug(attrs, fallback) {
 }
 
 const generated = [];
-let styleIndex = 0;
-html = html.replace(/<style([^>]*)>([\s\S]*?)<\/style>/gi, (_full, rawAttrs, content) => {
-  styleIndex += 1;
-  const attrs = rawAttrs.trim();
-  const name = `${String(styleIndex).padStart(2, "0")}-${slug(attrs, "base")}.css`;
-  const relativePath = `assets/css/legacy-inline/${name}`;
-  const target = join(root, ...relativePath.split("/"));
-  mkdirSync(dirname(target), { recursive: true });
-  writeFileSync(target, `${content.trim()}\n`, "utf8");
-  generated.push({ name: `legacy-style-${name.replace(/\.css$/, "")}`, path: relativePath, mode: "legacy-extracted-style" });
-  return `<link${attrs ? ` ${attrs}` : ""} rel="stylesheet" href="${relativePath}">`;
-});
 
+// Extract inline JavaScript first. This protects HTML fragments contained inside
+// JavaScript template literals (for example <style>...</style> in print views)
+// from being mistaken for top-level HTML styles by the next pass.
 let scriptIndex = 0;
 html = html.replace(/<script(?![^>]*\bsrc=)([^>]*)>([\s\S]*?)<\/script>/gi, (_full, rawAttrs, content) => {
   scriptIndex += 1;
@@ -36,6 +27,19 @@ html = html.replace(/<script(?![^>]*\bsrc=)([^>]*)>([\s\S]*?)<\/script>/gi, (_fu
   writeFileSync(target, `${content.trim()}\n`, "utf8");
   generated.push({ name: `legacy-script-${name.replace(/\.js$/, "")}`, path: relativePath, mode: "legacy-extracted-script" });
   return `<script${attrs ? ` ${attrs}` : ""} src="${relativePath}"></script>`;
+});
+
+let styleIndex = 0;
+html = html.replace(/<style([^>]*)>([\s\S]*?)<\/style>/gi, (_full, rawAttrs, content) => {
+  styleIndex += 1;
+  const attrs = rawAttrs.trim();
+  const name = `${String(styleIndex).padStart(2, "0")}-${slug(attrs, "base")}.css`;
+  const relativePath = `assets/css/legacy-inline/${name}`;
+  const target = join(root, ...relativePath.split("/"));
+  mkdirSync(dirname(target), { recursive: true });
+  writeFileSync(target, `${content.trim()}\n`, "utf8");
+  generated.push({ name: `legacy-style-${name.replace(/\.css$/, "")}`, path: relativePath, mode: "legacy-extracted-style" });
+  return `<link${attrs ? ` ${attrs}` : ""} rel="stylesheet" href="${relativePath}">`;
 });
 
 if (styleIndex || scriptIndex) writeFileSync(indexPath, html, "utf8");

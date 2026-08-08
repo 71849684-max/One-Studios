@@ -62,3 +62,11 @@ No agregar nuevas funciones directamente al monolito. Todo código nuevo debe en
 - `tests/` y `tools/`: controles automatizados.
 
 Los reportes de entrega, hashes y auditorÃ­as histÃ³ricas se consultan en Git y no se duplican en la raÃ­z.
+
+## Rutas operativas normalizadas
+
+- SQL requerido: `archive/sql/required/`.
+- SQL opcional: `archive/sql/optional/`.
+- SQL del piloto nativo SAKURA: `archive/sql/sakura-native/`.
+- Scripts Windows principales: `scripts/windows/`.
+- Los tres `.bat` de la raíz son lanzadores de compatibilidad para accesos directos creados antes de la limpieza.

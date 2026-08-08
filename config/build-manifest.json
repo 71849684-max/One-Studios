@@ -515,12 +515,6 @@
       "origin": "refactor-baseline-v1"
     },
     {
-      "name": "legacy-style-21-base",
-      "path": "assets/css/legacy-inline/21-base.css",
-      "mode": "legacy-extracted-style",
-      "origin": "refactor-baseline-v1"
-    },
-    {
       "name": "legacy-script-01-runtime",
       "path": "assets/js/legacy-inline/01-runtime.js",
       "mode": "legacy-extracted-script",
@@ -645,23 +639,25 @@
     "rpc_manifest": "config/rpc-manifest.json",
     "version_table": "marketing_app.system_versions (optional)",
     "required_rpc_count": 45,
-    "optional_work360_sql": "SQL_OPCIONAL_v17_0.sql",
-    "optional_record_lifecycle_sql": "SQL_OPCIONAL_v17_5_1.sql",
+    "optional_work360_sql": "archive/sql/optional/SQL_OPCIONAL_v17_0.sql",
+    "optional_record_lifecycle_sql": "archive/sql/optional/SQL_OPCIONAL_v17_5_1.sql",
     "optional_rpc_manifest": "config/rpc-manifest-v17_5_1-optional.json",
-    "optional_wall_work_sql": "SQL_OPCIONAL_v17_7.sql",
+    "optional_wall_work_sql": "archive/sql/optional/SQL_OPCIONAL_v17_7.sql",
     "optional_wall_work_rpc_manifest": "config/rpc-manifest-v17_7-optional.json",
-    "optional_design_system_sql": "SQL_OPCIONAL_v17_8.sql",
+    "optional_design_system_sql": "archive/sql/optional/SQL_OPCIONAL_v17_8.sql",
     "optional_design_system_rpc_manifest": "config/rpc-manifest-v17_8-optional.json",
-    "optional_collaborative_workspace_sql": "SQL_OPCIONAL_v17_9.sql",
+    "optional_collaborative_workspace_sql": "archive/sql/optional/SQL_OPCIONAL_v17_9.sql",
     "optional_collaborative_workspace_rpc_manifest": "config/rpc-manifest-v17_9-optional.json",
-    "optional_member_governance_sql": "SQL_OPCIONAL_v17_10.sql",
+    "optional_member_governance_sql": "archive/sql/optional/SQL_OPCIONAL_v17_10.sql",
     "optional_member_governance_rpc_manifest": "config/rpc-manifest-v17_10-optional.json",
-    "optional_task_operations_sql": "SQL_OPCIONAL_v17_11.sql",
+    "optional_task_operations_sql": "archive/sql/optional/SQL_OPCIONAL_v17_11.sql",
     "optional_task_operations_rpc_manifest": "config/rpc-manifest-v17_11-optional.json",
-    "optional_visual_content_sql": "SQL_OPCIONAL_v17_12.sql",
+    "optional_visual_content_sql": "archive/sql/optional/SQL_OPCIONAL_v17_12.sql",
     "optional_visual_content_rpc_manifest": "config/rpc-manifest-v17_12-optional.json",
-    "optional_sakura_sql": "sql/SAKURA_NATIVE_PILOT_v17_12_13.sql",
-    "optional_sakura_rollback": "sql/ROLLBACK_SAKURA_NATIVE_PILOT_v17_12_13.sql"
+    "optional_sakura_sql": "archive/sql/sakura-native/SAKURA_NATIVE_PILOT_v17_12_13.sql",
+    "optional_sakura_rollback": "archive/sql/sakura-native/ROLLBACK_SAKURA_NATIVE_PILOT_v17_12_13.sql",
+    "required_requests360_sql": "archive/sql/required/SQL_REQUERIDO_v17_16_0_SOLICITUDES_360.sql",
+    "required_sakura_messaging_sql": "archive/sql/required/SQL_REQUERIDO_v17_16_7_SAKURA_MESSAGING_V2.sql"
   },
   "constraints": {
     "creative_arena_untouched": true,
