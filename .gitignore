@@ -11,7 +11,16 @@ Thumbs.db
 .idea/
 *.log
 
+# Credenciales locales: nunca versionar secretos de Supabase o Decolecta
+.env
+.env.local
+.env.*.local
+config/.env.decolecta.local
+
 # Dependencias y artefactos locales de herramientas
 node_modules/
 coverage/
+dist/
 .cache/
+.vercel-static/
+.migration-private/

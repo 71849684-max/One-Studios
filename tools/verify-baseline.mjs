@@ -10,7 +10,7 @@ const warnings = [];
 function filesUnder(directory) {
   const result = [];
   for (const entry of readdirSync(directory, { withFileTypes: true })) {
-    if ([".git", "node_modules", "SAKURA_DATA"].includes(entry.name)) continue;
+    if ([".git", ".migration-private", ".vercel-static", "node_modules", "SAKURA_DATA"].includes(entry.name)) continue;
     const path = join(directory, entry.name);
     if (entry.isDirectory()) result.push(...filesUnder(path));
     else result.push(path);
