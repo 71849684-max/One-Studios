@@ -1,0 +1,29 @@
+/* Capa canónica de integridad: corrige geometría sin rediseñar módulos. */
+html{max-width:100%;overflow-x:hidden}
+body{max-width:100%;overflow-x:clip}
+[hidden]{display:none!important}
+body.v472-topnav-on .main{width:100%;min-width:0;max-width:100%;margin:0;overflow:visible}
+body.v472-topnav-on .main>.top,body.v472-topnav-on .main>.realtime-bar{width:calc(100% - 24px);max-width:calc(100% - 24px);margin-inline:12px}
+body.v472-topnav-on .main>.top{padding-inline:20px}
+body.v472-topnav-on .section{width:100%;min-width:0;max-width:100%;overflow-x:clip}
+body.v472-topnav-on .section>*{min-width:0}
+.section .grid2,.section .grid3,.section [class*="-grid"]{min-width:0}
+.section .grid2>*,.section .grid3>*,.section [class*="-grid"]>*{min-width:0}
+.section img,.section svg,.section video,.section canvas{max-width:100%}
+.section .table-wrap,.section [class*="table-wrap"]{max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain}
+dialog{max-width:calc(100vw - 24px);max-height:calc(100dvh - 24px);overflow:hidden}
+dialog[open]{display:flex;flex-direction:column}
+dialog>form,dialog>[class*="body"],dialog>[class*="content"]{min-height:0;overflow:auto}
+#v472AppleTopNav{max-width:calc(100vw - 24px)}
+#v472AppleTopNav .v472-menu,#v472AppleTopNav .v472-actions{min-width:0}
+.v472-mega{max-width:calc(100vw - 24px);max-height:calc(100dvh - 82px);overflow:auto;overscroll-behavior:contain}
+.v472-mega-grid>*{min-width:0}
+.v472-icon-btn{overflow:hidden;text-overflow:clip}
+.permission-lock{opacity:.5;pointer-events:none}
+@media(max-width:900px){body.v472-topnav-on .section{padding-inline:12px}.section .grid2,.section .grid3{grid-template-columns:1fr}.v472-mega{left:12px!important;right:12px!important;width:auto!important}}
+@media(max-width:540px){dialog{max-width:calc(100vw - 12px);max-height:calc(100dvh - 12px)}body.v472-topnav-on .section{padding-inline:8px}}
+/* ONE Studios · identidad visual oficial */
+.logo,.v412-boot-logo,#v472AppleTopNav .v472-brand-mark{padding:0!important;overflow:hidden!important;background:#fff!important}
+.logo img,.v412-boot-logo img,#v472AppleTopNav .v472-brand-mark img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important}
+#v472AppleTopNav .v472-brand-mark{border-radius:9px!important;box-shadow:0 5px 14px rgba(24,32,51,.16)!important}
+.v412-boot-logo{border-radius:18px!important}

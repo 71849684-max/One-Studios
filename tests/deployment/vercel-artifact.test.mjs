@@ -33,8 +33,12 @@ test("production artifact contains no Sakura or private source paths", () => {
 
 test("runtime config contains only public production values", () => {
   const config = readFileSync(join(output, "config", "public-runtime-config.js"), "utf8");
-  assert.match(config, /https:\/\/production-check\.supabase\.co/);
-  assert.match(config, /test-anon-key/);
+  const expectedUrl = String(process.env.SUPABASE_URL || "").trim().replace(/\/$/, "");
+  const expectedKey = String(process.env.SUPABASE_ANON_KEY || "").trim();
+  assert.ok(expectedUrl, "SUPABASE_URL is required for deployment verification");
+  assert.ok(expectedKey, "SUPABASE_ANON_KEY is required for deployment verification");
+  assert.ok(config.includes(`supabaseUrl:${JSON.stringify(expectedUrl)}`));
+  assert.ok(config.includes(`supabaseAnonKey:${JSON.stringify(expectedKey)}`));
   assert.match(config, /enabled:false/);
   assert.doesNotMatch(config, /service_role|DECOLECTA_TOKEN|postgresql:\/\//i);
 });

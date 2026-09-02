@@ -1,0 +1,176 @@
+/* ONE Studios: propietario canónico del menú superior, mega menú y búsqueda. */
+:root{
+  --topnav-height:52px;
+  --topnav-offset:8px;
+  --topnav-surface:#fafafd;
+  --topnav-panel:#fff;
+  --topnav-border:rgba(25,24,31,.11);
+  --topnav-text:#242329;
+  --topnav-muted:#74717d;
+  --topnav-accent:#6e26f6;
+  --topnav-hover:#f0eff4;
+  --topnav-shadow:0 12px 34px rgba(27,24,38,.13);
+}
+
+body.v472-topnav-on,body.v473-topnav-on{padding-top:calc(var(--topnav-height) + 22px)!important}
+
+#v472AppleTopNav{
+  position:fixed!important;z-index:10020!important;
+  top:var(--topnav-offset)!important;right:12px!important;left:12px!important;
+  height:var(--topnav-height)!important;display:none!important;align-items:center!important;
+  overflow:visible!important;border:1px solid var(--topnav-border)!important;border-radius:16px!important;
+  background:var(--topnav-surface)!important;box-shadow:var(--topnav-shadow)!important;
+  color:var(--topnav-text)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+body.v472-topnav-on #v472AppleTopNav,body.v473-topnav-on #v472AppleTopNav{display:flex!important}
+
+#v472AppleTopNav .v472-nav-inner{
+  position:relative!important;width:100%!important;max-width:1560px!important;height:100%!important;
+  margin:0 auto!important;padding:0 10px!important;display:grid!important;
+  grid-template-columns:max-content minmax(0,1fr) max-content!important;align-items:center!important;gap:10px!important;
+}
+#v472AppleTopNav .v472-brand,#v472AppleTopNav .v472-right{position:static!important}
+#v472AppleTopNav .v472-brand{
+  height:38px!important;min-width:38px!important;margin:0!important;padding:0 8px!important;
+  display:flex!important;align-items:center!important;gap:8px!important;border:0!important;border-radius:11px!important;
+  background:transparent!important;box-shadow:none!important;color:var(--topnav-text)!important;cursor:pointer!important;
+}
+#v472AppleTopNav .v472-brand:hover{background:var(--topnav-hover)!important;transform:none!important}
+#v472AppleTopNav .v472-brand-mark{
+  width:30px!important;height:30px!important;flex:0 0 30px!important;display:grid!important;place-items:center!important;
+  border-radius:50%!important;background:linear-gradient(145deg,#7250ff,#b765ef)!important;
+  box-shadow:0 4px 12px rgba(90,48,170,.2)!important;color:#fff!important;font-size:12px!important;font-weight:800!important;
+}
+#v472AppleTopNav .v472-brand-mark::before{content:none!important}
+#v472AppleTopNav .v472-brand-text{
+  display:block!important;max-width:170px!important;overflow:hidden!important;color:var(--topnav-text)!important;
+  font-size:12px!important;font-weight:700!important;line-height:1!important;text-overflow:ellipsis!important;white-space:nowrap!important;
+}
+
+#v472AppleTopNav .v472-menu{
+  min-width:0!important;height:100%!important;display:flex!important;align-items:center!important;
+  justify-content:center!important;gap:2px!important;overflow:hidden!important;
+}
+#v472AppleTopNav .v472-menu-item{
+  width:auto!important;height:36px!important;margin:0!important;padding:0 11px!important;display:flex!important;
+  flex:0 1 auto!important;align-items:center!important;justify-content:center!important;border:0!important;border-radius:10px!important;
+  background:transparent!important;box-shadow:none!important;color:#56535d!important;
+  font:600 12px/1 system-ui,-apple-system,"Segoe UI",sans-serif!important;cursor:pointer!important;
+  transform:none!important;white-space:nowrap!important;
+}
+#v472AppleTopNav .v472-menu-item:hover,#v472AppleTopNav .v472-menu-item.active,#v472AppleTopNav .v472-menu-item.current{
+  background:var(--topnav-hover)!important;box-shadow:none!important;color:#17161b!important;transform:none!important;
+}
+
+#v472AppleTopNav .v472-right{
+  height:100%!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:4px!important;
+}
+#v472AppleTopNav .v472-icon-btn,#v472AppleTopNav .v171210-create-button{
+  height:36px!important;margin:0!important;border:0!important;border-radius:10px!important;
+  box-shadow:none!important;cursor:pointer!important;transform:none!important;
+}
+#v472AppleTopNav .v472-icon-btn{
+  width:36px!important;padding:0!important;display:grid!important;place-items:center!important;
+  background:transparent!important;color:#4f4c56!important;
+}
+#v472AppleTopNav .v472-icon-btn:hover{background:var(--topnav-hover)!important}
+#v472AppleTopNav .v472-icon-btn svg{width:18px!important;height:18px!important}
+#v472AppleTopNav .v171210-create-button{
+  padding:0 14px!important;display:flex!important;align-items:center!important;gap:7px!important;
+  background:#26242b!important;color:#fff!important;font-size:12px!important;font-weight:700!important;
+}
+#v472AppleTopNav .v171210-create-button:hover,#v472AppleTopNav .v171210-create-button[aria-expanded="true"]{background:#111014!important}
+
+.v472-mega,.v472-search-panel{
+  position:fixed!important;z-index:10015!important;top:calc(var(--topnav-offset) + var(--topnav-height) + 8px)!important;
+  right:auto!important;left:50%!important;display:block!important;overflow:hidden!important;
+  border:1px solid var(--topnav-border)!important;border-radius:18px!important;background:var(--topnav-panel)!important;
+  box-shadow:0 24px 70px rgba(24,22,31,.18)!important;opacity:0!important;visibility:hidden!important;
+  pointer-events:none!important;transform:translateX(-50%) translateY(-8px)!important;
+  transition:opacity 160ms ease,transform 160ms ease,visibility 160ms ease!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+.v472-mega{width:min(1080px,calc(100vw - 28px))!important;max-height:calc(100dvh - 86px)!important}
+.v472-mega.open,.v472-search-panel.open{
+  opacity:1!important;visibility:visible!important;pointer-events:auto!important;
+  transform:translateX(-50%) translateY(0)!important;
+}
+.v472-mega .v472-mega-inner{
+  box-sizing:border-box!important;width:100%!important;max-width:none!important;margin:0!important;padding:26px!important;
+  display:grid!important;grid-template-columns:minmax(220px,.9fr) minmax(280px,1.2fr) minmax(220px,.9fr)!important;
+  align-items:start!important;gap:28px!important;overflow:auto!important;
+}
+.v472-mega .v472-mega-inner>div{min-width:0!important}
+.v472-mega .v472-mega-kicker{
+  margin:0 0 9px!important;color:var(--topnav-muted)!important;font-size:10px!important;font-weight:750!important;
+  letter-spacing:.08em!important;line-height:1.2!important;text-transform:uppercase!important;
+}
+.v472-mega .v472-mega-title{
+  margin:0!important;color:var(--topnav-text)!important;font-size:clamp(24px,2.1vw,32px)!important;
+  font-weight:720!important;letter-spacing:-.045em!important;line-height:1.03!important;
+}
+.v472-mega .v472-mega-subtitle{
+  max-width:360px!important;margin:12px 0 0!important;color:var(--topnav-muted)!important;font-size:13px!important;line-height:1.45!important;
+}
+.v472-mega .v472-mega-links,.v472-mega .v472-mega-small{
+  min-width:0!important;width:100%!important;margin:0!important;display:grid!important;
+  grid-column:auto!important;align-content:start!important;gap:7px!important;
+}
+.v472-mega .v472-mega-link,.v472-mega .v472-mega-small button{
+  box-sizing:border-box!important;width:100%!important;max-width:none!important;min-height:40px!important;
+  margin:0!important;padding:10px 12px!important;display:block!important;border:0!important;border-radius:11px!important;
+  background:#f7f7f9!important;box-shadow:none!important;color:var(--topnav-text)!important;
+  font:650 13px/1.25 system-ui,-apple-system,"Segoe UI",sans-serif!important;text-align:left!important;
+  white-space:normal!important;cursor:pointer!important;transform:none!important;
+}
+.v472-mega .v472-mega-link:hover,.v472-mega .v472-mega-small button:hover,
+.v472-mega .v472-mega-link:focus-visible,.v472-mega .v472-mega-small button:focus-visible{
+  background:#ecebf0!important;box-shadow:none!important;color:#4d1dac!important;
+  outline:2px solid rgba(110,38,246,.24)!important;outline-offset:-2px!important;transform:none!important;
+}
+
+.v472-search-panel{width:min(820px,calc(100vw - 28px))!important}
+.v472-search-panel .v472-search-inner{box-sizing:border-box!important;width:100%!important;max-width:none!important;margin:0!important;padding:20px!important}
+.v472-search-panel .v472-search-box{
+  height:50px!important;padding:0 14px!important;display:flex!important;align-items:center!important;gap:10px!important;
+  border:1px solid var(--topnav-border)!important;border-radius:13px!important;background:#f7f7f9!important;box-shadow:none!important;
+}
+.v472-search-panel .v472-search-box input{
+  min-width:0!important;height:48px!important;flex:1!important;border:0!important;background:transparent!important;
+  box-shadow:none!important;outline:0!important;font-size:16px!important;
+}
+.v472-search-panel .v472-search-results{max-height:min(55dvh,480px)!important;margin-top:10px!important;overflow:auto!important}
+
+.v472-dim{
+  position:fixed!important;z-index:10000!important;inset:0!important;display:none!important;
+  background:rgba(24,22,30,.14)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+.v472-dim.show{display:block!important}
+
+@media(max-width:1220px){
+  #v472AppleTopNav .v472-brand-text{display:none!important}
+  #v472AppleTopNav .v472-menu-item{padding-inline:8px!important;font-size:11px!important}
+}
+@media(max-width:980px){
+  #v472AppleTopNav .v472-menu{display:none!important}
+  #v472AppleTopNav .v472-brand-text{display:block!important}
+  #v472AppleTopNav .v472-mobile-toggle{display:grid!important}
+  .v472-mega .v472-mega-inner{grid-template-columns:1fr 1fr!important;gap:20px!important}
+  .v472-mega .v472-mega-inner>div:first-child{grid-column:1/-1!important}
+}
+@media(max-width:640px){
+  :root{--topnav-height:50px;--topnav-offset:6px}
+  #v472AppleTopNav{right:7px!important;left:7px!important;border-radius:14px!important}
+  #v472AppleTopNav .v472-nav-inner{padding:0 7px!important}
+  #v472AppleTopNav .v472-brand-text{max-width:120px!important}
+  #v472AppleTopNav .v171210-create-button{width:36px!important;padding:0!important;justify-content:center!important}
+  #v472AppleTopNav .v171210-create-button span{display:none!important}
+  .v472-mega,.v472-search-panel{
+    right:7px!important;left:7px!important;width:auto!important;border-radius:16px!important;
+    transform:translateY(-8px)!important;
+  }
+  .v472-mega.open,.v472-search-panel.open{transform:translateY(0)!important}
+  .v472-mega .v472-mega-inner{padding:18px!important;grid-template-columns:1fr!important;gap:18px!important}
+  .v472-mega .v472-mega-inner>div:first-child{grid-column:auto!important}
+  .v472-mega .v472-mega-title{font-size:25px!important}
+}

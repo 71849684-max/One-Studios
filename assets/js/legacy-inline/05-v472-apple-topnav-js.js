@@ -87,6 +87,21 @@
       ]
     },
     {
+      id:"finanzas",
+      label:"Finanzas",
+      title:"Tesorería y contratos",
+      subtitle:"Registra contratos, cobranzas, gastos y capital disponible.",
+      links:[
+        ["Resumen financiero","treasury"],
+        ["Contratos","treasury"],
+        ["Movimientos y bóveda","treasury"]
+      ],
+      small:[
+        ["Nuevo contrato","treasury"],
+        ["Registrar gasto","treasury"]
+      ]
+    },
+    {
       id:"control",
       label:"Control",
       title:"Control gerencial",
@@ -102,16 +117,16 @@
       ],
       small:[
         ["Permisos","permissions"],
-        ["Admin","admin"]
+        ["Administración","admin"]
       ]
     },
     {
       id:"admin",
-      label:"Admin",
+      label:"Administración",
       title:"Administración",
       subtitle:"Configura usuarios, permisos y ajustes de la plataforma.",
       links:[
-        ["Admin","admin"],
+        ["Administración","admin"],
         ["Permisos","permissions"],
         ["Ajustes","settings"],
         ["Equipo","team"]
@@ -138,13 +153,21 @@
       if(typeof window.navTo === "function") window.navTo(id);
     }catch(e){}
   }
+  function routeAllowed(id){
+    var permissionCode = id === "treasury" ? "treasury.view" : "";
+    var permissions = window.OneStudios && window.OneStudios.permissions;
+    if(permissionCode && permissions && typeof permissions.isAllowed === "function"){
+      return permissions.isAllowed(permissionCode);
+    }
+    return typeof window.hasVisualPermission!=="function"||window.hasVisualPermission(id,"view");
+  }
   function createTopNav(){
     if($("#v472AppleTopNav")) return;
     var nav = document.createElement("div");
     nav.id = "v472AppleTopNav";
     nav.innerHTML =
       '<div class="v472-nav-inner">' +
-        '<button class="v472-brand" id="v472Brand"><span class="v472-brand-mark">iB</span><span class="v472-brand-text">Marketing Cloud <small style="font-size:9px;opacity:.55">v4.23</small></span></button>' +
+        '<button class="v472-brand" id="v472Brand"><span class="v472-brand-mark"><img src="assets/brand/one-studios-gradient-mark.jpeg" alt="ONE Studios"></span><span class="v472-brand-text">Marketing Cloud <small style="font-size:9px;opacity:.55">v4.23</small></span></button>' +
         '<div class="v472-menu">' +
           NAV.map(function(n){ return '<button class="v472-menu-item" data-v472-menu="'+esc(n.id)+'"><span>'+esc(n.label)+'</span></button>'; }).join("") +
         '</div>' +
@@ -207,11 +230,11 @@
           '<p class="v472-mega-subtitle">'+esc(cfg.subtitle)+'</p>' +
         '</div>' +
         '<div class="v472-mega-links">' +
-          (cfg.links || []).map(function(x){ return '<button class="v472-mega-link" data-v472-nav="'+esc(x[1])+'">'+esc(x[0])+'</button>'; }).join("") +
+          (cfg.links || []).filter(function(x){return routeAllowed(x[1]);}).map(function(x){ return '<button class="v472-mega-link" data-v472-nav="'+esc(x[1])+'">'+esc(x[0])+'</button>'; }).join("") +
         '</div>' +
         '<div class="v472-mega-small">' +
           '<div class="v472-mega-kicker">Accesos rápidos</div>' +
-          (cfg.small || []).map(function(x){ return '<button data-v472-nav="'+esc(x[1])+'">'+esc(x[0])+'</button>'; }).join("") +
+          (cfg.small || []).filter(function(x){return routeAllowed(x[1]);}).map(function(x){ return '<button data-v472-nav="'+esc(x[1])+'">'+esc(x[0])+'</button>'; }).join("") +
         '</div>' +
       '</div>';
     mega.classList.add("open");
@@ -285,6 +308,11 @@
   }
   document.addEventListener("DOMContentLoaded", function(){ setTimeout(boot, 300); });
   window.addEventListener("load", function(){ setTimeout(boot, 600); setTimeout(boot, 1600); });
+  window.addEventListener("inbestiga:permissions-ready", function(){
+    var mega = $("#v472Mega");
+    var active = document.querySelector("[data-v472-menu].active");
+    if(mega && mega.classList.contains("open") && active) openMega(active.getAttribute("data-v472-menu"));
+  });
   document.addEventListener("click", function(e){
     if(!e.target.closest("#v472AppleTopNav") && !e.target.closest("#v472Mega") && !e.target.closest("#v472SearchPanel")){
       closeAll();
