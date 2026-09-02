@@ -9,7 +9,8 @@
     "test:deployment": "node --test tests/deployment/*.test.mjs",
     "build:vercel": "node tools/build-vercel.mjs",
     "verify:vercel": "npm run build:vercel && npm run test:deployment",
-    "smoke:vercel": "node tests/deployment/smoke-vercel-artifact.mjs"
+    "smoke:vercel": "node tests/deployment/smoke-vercel-artifact.mjs",
+    "test:migration": "node --test tests/migration/*.test.mjs"
   },
   "engines": {
     "node": ">=20"
