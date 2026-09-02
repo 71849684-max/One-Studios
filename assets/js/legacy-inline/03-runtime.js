@@ -219,6 +219,9 @@ function v121NormalizeState(payload){
     return {...notification,recipient_id:recipientId,receiver_id:recipientId};
   });
   ["clients","areas","members","campaigns","briefs","tasks","editorial","posts","comments","reactions","assets","roles","settings","approval_history","client_errors","report_snapshots","role_permissions","live_events","member_work_profiles","member_time_events","member_work_links","member_schedule_blocks","member_schedule_exceptions","member_schedule_grid_slots","member_schedule_submissions","schedule_email_logs","cr_rooms","cr_items"].forEach(key=>{if(!Array.isArray(merged[key]))merged[key]=[]});
+  merged.role_permissions=merged.role_permissions.map(rule=>{const code=String(rule?.permission_code||[rule?.module,rule?.action].filter(Boolean).join("."));const split=code.split(".");return {...rule,permission_code:code,module:rule?.module||split[0]||"",action:rule?.action||split.slice(1).join(".")||""}});
+  if(!Array.isArray(merged.member_permissions))merged.member_permissions=[];
+  if(!Array.isArray(merged.effective_permissions))merged.effective_permissions=[];
   return merged;
 }
 async function loadAll(){
@@ -602,6 +605,9 @@ function v121RoleText(){
   return [role.name,role.label,role.title,role.description,role.slug,member?.position,member?.role_code].filter(Boolean).join(" ").toLowerCase();
 }
 function v121PermissionRule(module,action){
+  const code=[module,action].filter(Boolean).join(".");
+  const personal=(state.effective_permissions||[]).find(rule=>String(rule?.permission_code||"")===code);
+  if(personal)return {...personal,module,action};
   return (state.role_permissions||[]).find(rule=>String(rule?.role_code||"")===v121RoleCode()&&String(rule?.module||"")===String(module||"")&&String(rule?.action||"")===String(action||""))||null;
 }
 function v121AllowedRules(){return (state.role_permissions||[]).filter(rule=>String(rule?.role_code||"")===v121RoleCode()&&rule?.allowed===true)}
@@ -860,10 +866,24 @@ function renderV33(){updateBadges();renderConversationList();renderPresence();re
 function isJuniorRole(){return !isSupervisor()}
 function roleLabel(){const role=v121RoleRecord()||{};return role.label||role.name||role.title||member?.position||(isDirector()?"Dirección":isSupervisor()?"Supervisión":"Miembro del equipo")}
 function applyRoleNavigation(){
-  const supervisor=isSupervisor();
-  const director=isDirector();
-  document.querySelectorAll(".supervisor-only").forEach(el=>el.style.display=supervisor?"":"none");
-  document.querySelectorAll(".director-only").forEach(el=>el.style.display=director?"":"none");
+  const supervisor=isSupervisor(),director=isDirector();
+  document.querySelectorAll(".supervisor-only").forEach(el=>{
+    const section=el.dataset?.section;
+    const permitted=section?hasVisualPermission(section,"view"):supervisor;
+    el.style.display=permitted?"":"none";
+  });
+  document.querySelectorAll(".director-only").forEach(el=>{
+    const section=el.dataset?.section;
+    const permitted=section?hasVisualPermission(section,"view"):director;
+    el.style.display=permitted?"":"none";
+  });
+  const treasurySection=document.getElementById("treasury");
+  if(treasurySection)treasurySection.style.display=hasVisualPermission("treasury","view")?"":"none";
+  [["group_finance","treasury"],["group_control","control"],["group_admin","admin"]].forEach(([groupId,module])=>{
+    const group=document.getElementById(groupId),button=group?.previousElementSibling,permitted=hasVisualPermission(module,"view")||(module==="control"&&hasVisualPermission("reports","view"))||(module==="admin"&&hasVisualPermission("permissions","view"));
+    if(group)group.style.display=permitted?"":"none";
+    if(button)button.style.display=permitted?"":"none";
+  });
   if(isJuniorRole()){
     ["group_work","group_social"].forEach(id=>$(id)?.classList.add("open"));
   }else{
@@ -2136,7 +2156,7 @@ function navTo(id){
   document.body.classList.toggle("ca-arena-mode",arenaMode);
   document.body.classList.toggle("ib-home-mode",id==="home");
   if(arenaMode)window.scrollTo(0,0);
-  const titles={home:"Inicio",myday:"Mi día",search:"Buscador",notifications:"Notificaciones",schedulePro:"Horario Pro",workIntel:"Trabajo 360",tasks:"Tareas",requests360:"Solicitudes 360",approvals:"Aprobaciones",workload:"Carga del equipo",campaigns:"Campañas / Briefs",editorial:"Editorial",calendarOps:"Calendario operativo",creativeRoomsClean:"Salas creativas",hub:"Creative Hub",assets:"Archivos",wall:"Muro",messages:"Mensajes",profile:"Mi espacio",templates:"Plantillas",incidents:"Incidencias",team:"Equipo",live:"En vivo",control:"Control gerencial",performance:"Rendimiento técnico",reports:"Reportes Pro",automations:"Automatizaciones",governance:"Seguridad y gobernanza",auditpro:"Auditoría Pro",permissions:"Permisos",admin:"Administración",memberProfile:"Muro del miembro",socialTrash:"Mi basurero",settings:"Conexión"};
+  const titles={home:"Inicio",myday:"Mi día",search:"Buscador",notifications:"Notificaciones",schedulePro:"Horario Pro",workIntel:"Trabajo 360",tasks:"Tareas",requests360:"Solicitudes 360",approvals:"Aprobaciones",workload:"Carga del equipo",campaigns:"Campañas / Briefs",editorial:"Editorial",calendarOps:"Calendario operativo",creativeRoomsClean:"Salas creativas",hub:"Creative Hub",assets:"Archivos",wall:"Muro",messages:"Mensajes",profile:"Mi espacio",templates:"Plantillas",incidents:"Incidencias",team:"Equipo",live:"En vivo",treasury:"Tesorería y contratos",control:"Control gerencial",performance:"Rendimiento técnico",reports:"Reportes Pro",automations:"Automatizaciones",governance:"Seguridad y gobernanza",auditpro:"Auditoría Pro",permissions:"Permisos",admin:"Administración",memberProfile:"Muro del miembro",socialTrash:"Mi basurero",settings:"Conexión"};
   if($("pageTitle"))$("pageTitle").textContent=titles[id]||id;
   if(typeof window.v412EnhanceSections==="function")window.v412EnhanceSections();
   v412RenderSection(id);

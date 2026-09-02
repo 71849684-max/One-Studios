@@ -222,6 +222,12 @@
         let result = await callRpc("ibm_v179_capabilities");
         if (result?.error) throw result.error;
         const value = normalizeRpcPayload(result?.data) || {};
+        if (value.available === false) {
+          cloudAvailable = false;
+          cloudLastError = null;
+          updateBackendBadges();
+          return false;
+        }
         cloudAvailable = str(value.version).replace(/^v/i, "") === "17.9" || value.collaborative_workspace === true || value.multi_assignee === true;
         if (!cloudAvailable) throw new Error("La respuesta de capacidades v17.9 no fue reconocida.");
         cloudLastError = null;

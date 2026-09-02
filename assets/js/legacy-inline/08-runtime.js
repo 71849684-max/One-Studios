@@ -4,10 +4,10 @@ let v417Bound=false,v417PrivacyTimer=null,v417LastSummary=null;
 const v417RouteCatalog=[
   ["Inicio","home"],["Mi día","myday"],["Trabajo 360","workIntel"],["Horario Pro","schedulePro"],["Tareas","tasks"],["Aprobaciones","approvals"],["Carga del equipo","workload"],["Campañas","campaigns"],["Editorial","editorial"],["Calendario","calendarOps"],["Salas creativas","creativeRoomsClean"],["Creative Hub","hub"],["Archivos","assets"],["Muro","wall"],["Mensajes","messages"],["Control gerencial","control"],["Rendimiento","performance"],["Reportes","reports"],["Automatizaciones","automations"],["Gobernanza","governance"],["Auditoría","auditpro"],["Incidencias","incidents"],["Administración","admin"],["Permisos","permissions"],["Equipo","team"]
 ];
-const v417SupervisorRoutes=new Set(["approvals","workload","control","performance","reports","automations","governance","auditpro","incidents","admin","team"]);
+const v417SupervisorRoutes=new Set(["approvals","workload","treasury","control","performance","reports","automations","governance","auditpro","incidents","admin","team"]);
 const v417DirectorRoutes=new Set(["permissions"]);
 function v417Array(v){return Array.isArray(v)?v:[]}
-function v417ExplicitPermission(section){return v417Array(state?.role_permissions).find(p=>p.role_code===member?.role_code&&p.module===section&&p.action==="view")}
+function v417ExplicitPermission(section){return typeof v121PermissionRule==="function"?v121PermissionRule(section,"view"):v417Array(state?.role_permissions).find(p=>p.role_code===member?.role_code&&p.module===section&&p.action==="view")}
 function v417CanAccessSection(section){
   if(!section||["home","settings","profile","search","notifications","memberProfile","socialTrash","live"].includes(section))return true;
   const explicit=v417ExplicitPermission(section);if(explicit)return !!explicit.allowed;

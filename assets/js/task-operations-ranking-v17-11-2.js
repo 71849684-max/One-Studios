@@ -162,6 +162,12 @@
         const { data, error } = await callRpc("ibm_v1711_capabilities");
         if (error) throw error;
         const value = normalizeRpcPayload(data) || {};
+        if (value.available === false) {
+          cloudAvailable = false;
+          cloudLastError = null;
+          updateBackendNotice();
+          return false;
+        }
         cloudAvailable = str(value.version).replace(/^v/i, "") === "17.11" || value.task_operations === true;
         if (!cloudAvailable) throw new Error("La respuesta de capacidades v17.11 no fue reconocida.");
         cloudLastError = null;
