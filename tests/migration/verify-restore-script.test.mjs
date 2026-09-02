@@ -12,11 +12,13 @@ test("hosted Supabase restore is guarded and targets only a new project", () => 
     "Read-Host", "-AsSecureString", "ON_ERROR_STOP", "single-transaction",
     "session_replication_role", "roles.sql", "schema.sql", "data.sql",
     "history_schema.sql", "history_data.sql", "target-verification.sql",
+    "hosted-storage-policies.sql",
     "auth_users", "contracts", "movements", "vbdtdihxmapezhkfmugi",
-    "SHA256SUMS.txt", "auth.sessions", "auth.refresh_tokens",
+    "SHA256SUMS.txt",
   ]) {
     assert.ok(script.toLowerCase().includes(required.toLowerCase()), required);
   }
   assert.doesNotMatch(script, /db reset|include-seed|seed\.sql|service_role/i);
   assert.doesNotMatch(script, /docker\s+(stop|restart|rm)/i);
+  assert.doesNotMatch(script, /truncate[\s\S]*restart identity/i);
 });

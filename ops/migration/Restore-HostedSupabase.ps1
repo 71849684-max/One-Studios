@@ -14,6 +14,10 @@ $migrationOldProjectRef = 'vbdtdihxmapezhkfmugi'
 $migrationContainer = 'supabase_db_Plataforma_Marketing'
 $migrationRepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $migrationVerificationSql = Join-Path $PSScriptRoot 'target-verification.sql'
+$migrationStoragePoliciesSql = Join-Path $PSScriptRoot 'hosted-storage-policies.sql'
+. (Join-Path $PSScriptRoot 'Migration-Hash.ps1')
+. (Join-Path $PSScriptRoot 'Migration-SqlCompatibility.ps1')
+. (Join-Path $PSScriptRoot 'Migration-RestoreState.ps1')
 
 if ($ProjectRef -notmatch '^[a-z0-9]{20}$') { throw 'ProjectRef must be the 20-character reference from the new Supabase project.' }
 if ($ProjectRef -ne $ConfirmedProjectRef) { throw 'Project reference confirmation does not match.' }
@@ -47,7 +51,7 @@ foreach ($migrationHashLine in Get-Content -LiteralPath (Join-Path $migrationExp
     $migrationExpectedHashes[$Matches[2]] = $Matches[1].ToLowerInvariant()
 }
 foreach ($migrationArtifactName in $migrationRequiredFiles | Where-Object { $_ -ne 'SHA256SUMS.txt' }) {
-    $migrationActualHash = (Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $migrationExportPath $migrationArtifactName)).Hash.ToLowerInvariant()
+    $migrationActualHash = Get-MigrationSha256Hex -LiteralPath (Join-Path $migrationExportPath $migrationArtifactName)
     if ($migrationExpectedHashes[$migrationArtifactName] -ne $migrationActualHash) {
         throw "Migration artifact hash mismatch: $migrationArtifactName"
     }
@@ -63,6 +67,8 @@ $migrationPasswordPointer = [Runtime.InteropServices.Marshal]::SecureStringToBST
 $migrationPlainPassword = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($migrationPasswordPointer)
 $migrationRunId = (Get-Date).ToUniversalTime().ToString('yyyyMMddTHHmmssZ')
 $migrationContainerDirectory = "/tmp/one-studios-migration-$migrationRunId"
+$migrationHostedRolesPath = Join-Path ([System.IO.Path]::GetTempPath()) "one-studios-hosted-roles-$migrationRunId.sql"
+$migrationHostedDataPath = Join-Path ([System.IO.Path]::GetTempPath()) "one-studios-hosted-data-$migrationRunId.sql"
 
 function Invoke-TargetPsql {
     param(
@@ -80,56 +86,97 @@ function Invoke-TargetPsql {
 }
 
 try {
+    Convert-MigrationRolesForHostedSupabase `
+        -SourcePath (Join-Path $migrationExportPath 'roles.sql') `
+        -DestinationPath $migrationHostedRolesPath
+    Convert-MigrationDataForHostedSupabase `
+        -SourcePath (Join-Path $migrationExportPath 'data.sql') `
+        -DestinationPath $migrationHostedDataPath
+
     $migrationPreflightSql = @"
 select current_setting('server_version_num')::int / 10000,
        (select count(*) from auth.users),
-       (select count(*) from information_schema.tables where table_schema='marketing_app');
+       (select count(*) from auth.identities),
+       (select count(*) from information_schema.tables where table_schema='marketing_app'),
+       to_regclass('supabase_migrations.schema_migrations') is null;
 "@
     $migrationPreflight = (Invoke-TargetPsql -Capture -PsqlArguments @('-At', '-F', '|', '-v', 'ON_ERROR_STOP=1', '-c', $migrationPreflightSql) | Select-Object -Last 1).Trim()
-    if ($migrationPreflight -notmatch '^17\|0\|0$') {
-        throw "Restore target is not an empty PostgreSQL 17 Supabase project: $migrationPreflight"
-    }
+    $migrationRestoreMode = Resolve-MigrationRestoreMode -PreflightState $migrationPreflight
 
     docker exec $migrationContainer mkdir -p $migrationContainerDirectory | Out-Null
     if ($LASTEXITCODE -ne 0) { throw 'Could not prepare the temporary restore directory.' }
 
     foreach ($migrationCopyName in @('roles.sql', 'schema.sql', 'data.sql', 'history_schema.sql', 'history_data.sql')) {
-        docker cp (Join-Path $migrationExportPath $migrationCopyName) "${migrationContainer}:$migrationContainerDirectory/$migrationCopyName" | Out-Null
+        $migrationCopySource = switch ($migrationCopyName) {
+            'roles.sql' { $migrationHostedRolesPath }
+            'data.sql' { $migrationHostedDataPath }
+            default { Join-Path $migrationExportPath $migrationCopyName }
+        }
+        docker cp $migrationCopySource "${migrationContainer}:$migrationContainerDirectory/$migrationCopyName" | Out-Null
         if ($LASTEXITCODE -ne 0) { throw "Could not stage $migrationCopyName for restore." }
     }
     docker cp $migrationVerificationSql "${migrationContainer}:$migrationContainerDirectory/target-verification.sql" | Out-Null
     if ($LASTEXITCODE -ne 0) { throw 'Could not stage target-verification.sql.' }
+    docker cp $migrationStoragePoliciesSql "${migrationContainer}:$migrationContainerDirectory/hosted-storage-policies.sql" | Out-Null
+    if ($LASTEXITCODE -ne 0) { throw 'Could not stage hosted-storage-policies.sql.' }
 
-    Invoke-TargetPsql -PsqlArguments @(
-        '--single-transaction', '--variable', 'ON_ERROR_STOP=1',
-        '--file', "$migrationContainerDirectory/roles.sql",
-        '--file', "$migrationContainerDirectory/schema.sql",
-        '--command', 'SET session_replication_role = replica',
-        '--file', "$migrationContainerDirectory/data.sql"
-    )
+    if ($migrationRestoreMode -eq 'fresh') {
+        Invoke-TargetPsql -PsqlArguments @(
+            '--single-transaction', '--variable', 'ON_ERROR_STOP=1',
+            '--file', "$migrationContainerDirectory/roles.sql",
+            '--file', "$migrationContainerDirectory/schema.sql",
+            '--command', 'SET session_replication_role = replica',
+            '--file', "$migrationContainerDirectory/data.sql"
+        )
+    } else {
+        $migrationResumeCountsSql = @"
+select (select count(*) from auth.users),
+       (select count(*) from auth.identities),
+       (select count(*) from marketing_app.members),
+       (select count(*) from marketing_app.clients),
+       (select count(*) from marketing_app.treasury_contracts),
+       (select count(*) from marketing_app.treasury_installments),
+       (select count(*) from marketing_app.treasury_movements),
+       (select count(*) from marketing_app.roles),
+       (select count(*) from marketing_app.role_permissions),
+       (select count(*) from storage.buckets),
+       (select count(*) from storage.objects);
+"@
+        $migrationResumeCounts = (Invoke-TargetPsql -Capture -PsqlArguments @('-At', '-F', '|', '-v', 'ON_ERROR_STOP=1', '-c', $migrationResumeCountsSql) | Select-Object -Last 1).Trim()
+        $migrationExpectedResumeCounts = '3|3|3|1|2|4|11|5|247|3|0'
+        if ($migrationResumeCounts -ne $migrationExpectedResumeCounts) {
+            throw "Resume checkpoint parity mismatch. Expected $migrationExpectedResumeCounts; received $migrationResumeCounts"
+        }
+    }
 
-    $migrationHistoryState = (Invoke-TargetPsql -Capture -PsqlArguments @(
+    $migrationHistoryRelation = (Invoke-TargetPsql -Capture -PsqlArguments @(
         '-At', '-v', 'ON_ERROR_STOP=1', '-c',
-        "select case when to_regclass('supabase_migrations.schema_migrations') is null then 'missing' else (select count(*)::text from supabase_migrations.schema_migrations) end"
+        "select coalesce(to_regclass('supabase_migrations.schema_migrations')::text, 'missing')"
     ) | Select-Object -Last 1).Trim()
-    if ($migrationHistoryState -eq 'missing') {
+    if ($migrationHistoryRelation -eq 'missing') {
         Invoke-TargetPsql -PsqlArguments @(
             '--single-transaction', '--variable', 'ON_ERROR_STOP=1',
             '--file', "$migrationContainerDirectory/history_schema.sql",
             '--file', "$migrationContainerDirectory/history_data.sql"
         )
-    } elseif ($migrationHistoryState -eq '0') {
+    } else {
+        $migrationHistoryState = (Invoke-TargetPsql -Capture -PsqlArguments @(
+            '-At', '-v', 'ON_ERROR_STOP=1', '-c',
+            'select count(*) from supabase_migrations.schema_migrations'
+        ) | Select-Object -Last 1).Trim()
+        if ($migrationHistoryState -eq '0') {
         Invoke-TargetPsql -PsqlArguments @(
             '--single-transaction', '--variable', 'ON_ERROR_STOP=1',
             '--file', "$migrationContainerDirectory/history_data.sql"
         )
-    } elseif ($migrationHistoryState -ne '16') {
-        throw "Unexpected migration history state after restore: $migrationHistoryState"
+        } elseif ($migrationHistoryState -ne '16') {
+            throw "Unexpected migration history state after restore: $migrationHistoryState"
+        }
     }
 
     Invoke-TargetPsql -PsqlArguments @(
-        '--single-transaction', '--variable', 'ON_ERROR_STOP=1', '-c',
-        'truncate table auth.refresh_tokens, auth.sessions, auth.mfa_amr_claims, auth.mfa_challenges, auth.flow_state, auth.one_time_tokens restart identity cascade;'
+        '--single-transaction', '--variable', 'ON_ERROR_STOP=1',
+        '--file', "$migrationContainerDirectory/hosted-storage-policies.sql"
     )
 
     $migrationTargetInventory = Invoke-TargetPsql -Capture -PsqlArguments @(
@@ -200,6 +247,14 @@ from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname in ('
     Write-Host "Parity report: $(Join-Path $migrationExportPath 'parity-report.txt')"
 } finally {
     $migrationPlainPassword = $null
+    foreach ($migrationTemporaryFile in @($migrationHostedRolesPath, $migrationHostedDataPath)) {
+        if ([System.IO.File]::Exists($migrationTemporaryFile)) {
+            [System.IO.File]::Delete($migrationTemporaryFile)
+        }
+    }
+    if ([System.IO.File]::Exists($migrationHostedRolesPath)) {
+        [System.IO.File]::Delete($migrationHostedRolesPath)
+    }
     if ($migrationPasswordPointer -ne [IntPtr]::Zero) {
         [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($migrationPasswordPointer)
     }
